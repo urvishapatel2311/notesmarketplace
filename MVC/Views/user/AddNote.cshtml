@@ -1,0 +1,264 @@
+﻿@model NotesMarketPlace.Models.tblNoteDetail
+
+@{
+    Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    ViewBag.Title = "AddNote";
+}
+
+ 
+
+
+<div>
+
+    <section id="addnotes">
+        <!-- up Background photo -->
+        <div id="bg-half" class="image-fluid">
+            <!-- heading of page -->
+            <div id="page-heading" class="text-center">
+                <h1>Add Notes</h1>
+            </div>
+        </div>
+
+        <div class="content-box-md">
+            <div class="container">
+                <form method="post" enctype="multipart/form-data">
+                    <!-- General heading -->
+                    <div class="general-heading" id="user-detail-01">
+                        <h3>Basic Note Details</h3>
+                    </div>
+                    @ViewBag.Saved
+                    <div class="user-p">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="title">Title *</label>
+                                        @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="category">Category *</label>
+                                        @Html.DropDownListFor(m => m.noteCategory, ViewBag.CategoryList as SelectList, "Select your category", new { @class = "form-control dropdown-icon" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="profilepic">Display Picture</label>
+                                        <div class="upload text-center">
+                                            <input type="file" accept="image/*" name="imgfile">
+                                            <label class="file  text-center" for="file">
+                                                <img src="~/Content/images/User-Profile/upload.png">
+                                                <p>Upload a Picture</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="profilepic">Upload Notes *</label>
+                                        <div class="upload text-center">
+                                            <input type="file" accept=".pdf" name="pdfFile">
+                                            <label class="file text-center" for="file">
+                                                <img src="~/Content/images/User-Profile/upload.png">
+                                                <p>Upload your Notes</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="type">Type</label>
+                                        @Html.DropDownListFor(m => m.noteType, ViewBag.TypeList as SelectList, "Select your note type", new { @class = "form-control dropdown-icon" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="no-of-page">Number of Pages</label>
+                                        @Html.TextBoxFor(m => m.numberOfPage, new { placeholder = "Enter number of note pages", @type = "number", @class = "form-control", @id = "no-of-page" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="desc">Description *</label>
+                                        @Html.TextAreaFor(m => m.description, new { placeholder = "Enter your description", @class = "form-control", @id = "desc" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="general-heading" id="user-detail-03">
+                        <h3>Institution Information</h3>
+                    </div>
+                    <div class="user-p">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        @Html.DropDownListFor(m => m.country, ViewBag.CountryList as SelectList, "Select your country", new { @class = "form-control dropdown-icon" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="i-name">Institution Name</label>
+                                        @Html.TextBoxFor(m => m.noteUniversity, new { placeholder = "Enter your institution name", @class = "form-control", @id = "i-name" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="general-heading" id="user-detail-03">
+                        <h3>Course Details</h3>
+                    </div>
+                    <div class="user-p" id="user-detail-03">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="c-name">Course Name</label>
+                                        @Html.TextBoxFor(m => m.courseName, new { placeholder = "Enter your course name", @class = "form-control", @id = "c-name" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="c-code">Course code</label>
+                                        @Html.TextBoxFor(m => m.courseCode, new { placeholder = "Enter your course code", @class = "form-control", @id = "c-code" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="p-l">Professor / Lecturer</label>
+                                        @Html.TextBoxFor(m => m.professor, new { placeholder = "Enter your professor name", @class = "form-control", @id = "p-l" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="general-heading" id="user-detail-03">
+                        <h3>Selling Information</h3>
+                    </div>
+                    <script type="text/javascript">
+                        document.getElementById("sell-p").value = "0";
+                        function Sell() {
+                            document.getElementById("sell-p").removeAttribute("readonly", "readonly");
+                        }
+                        function Free() {
+                            document.getElementById("sell-p").setAttribute("readonly", "readonly");
+                            document.getElementById("sell-p").value = "0";
+                        }
+                    </script>
+                    <div class="user-p" id="user-detail-03">
+                        <div class="row">
+                            <div class="col-md-6 col-sd-6 ">
+                                <div class="radio-content">
+                                    <h6 for="sell">Sell For *</h6>
+                                    <div class="radio-item ">
+                                        @*@if (Model.sellingPrice != 0)
+                            {
+                                @Html.RadioButtonFor(m => m.isPaid, new { @Name = "role", @id = "free", onclick = "Free()" })
+                            }
+                            else
+                            {*@
+                                        @Html.RadioButtonFor(m => m.isPaid,"Free", new { @Name = "role", @id = "free", onclick = "Free()"/*, @checked="checked" */})
+                                        @*}*@
+
+                                    </div>
+
+                                    <label class="role" for="free">Free</label>
+                                    <div class="radio-item">
+                                        @*@if (Model.sellingPrice != 0)
+                            {
+                                @Html.RadioButtonFor(m => m.isPaid, new { @Name = "role", @id = "paid", selected = true, onclick = "Sell()" })
+                            }
+                            else
+                            {*@
+                                        @Html.RadioButtonFor(m => m.isPaid,"Paid", new { @Name = "role", @id = "paid", onclick = "Sell()"})
+                                        @*}*@
+
+
+                                    </div>
+
+                                    <label class="role" for="paid">Paid</label>
+                                </div>
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label for="sell-p">Sell Price *</label>
+                                        @Html.TextBoxFor(m => m.sellingPrice, new { placeholder = "Enter your price", @type = "number", @class = "form-control", @id = "sell-p"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-content">
+                                    <div class="form-group">
+                                        <label id="note-pre">Note Preview</label>
+                                        <div class="upload text-center note-pre">
+                                            <input type="file" accept=".pdf" name="notepreviewFile">
+                                            <label class="file  text-center" for="file">
+                                                <img src="~/Content/images/User-Profile/upload.png">
+                                                <p>Upload a file</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button id="btn-user" type="submit" class="btn btn-primary" name="command" value="save">Save</button>
+
+                                <button id="btn-publish" type="submit" class="btn btn-primary btn-head" name="command" value="publish" <!--data-toggle="modal" data-target="#exampleModalLong"-->>Publish</button>
+
+                                <!-- Modal
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+
+                <div class="popup-head text-center">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to publish?</h5>
+                </div>
+                <div class="popup-content">
+                    <p class="d-flex" style="color:black">Publishing this note will send note to administrator for review,once administrator review and approve then this note will be published to portal.Press yes to continue".</p>
+                    <button class="btn btn-primary" value="yes" name="updateStatus" id="btn-yes">yes</button>
+                    <button id="cancel" type="submit" class="btn btn-primary close-btn" name="updateStatus" value="cancel">Cancel</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+

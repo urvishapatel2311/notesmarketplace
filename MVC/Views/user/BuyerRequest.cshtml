@@ -1,0 +1,95 @@
+﻿@model IEnumerable<NotesMarketPlace.Models.ViewModel> 
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+}
+
+<div>
+    <!-- Buyer Request -->
+    <section id="buyerrequest" class="table-page">
+        <div class="content-box-md">
+            <div class="container">
+                <!-- General heading -->
+                <div class="row buy">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="com-heading">
+                            <h3>Buyer Requests</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <div class="search-box buy2 has-search">
+                            <input type="search" class="form-control search-icon" id="search2" placeholder="Search" name="searching" value="@ViewData["GetBuyersDetails"]">
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sr No.</th>
+                                <th scope="col">Note Title</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Buyer</th>
+                                <th scope="col">Phone No.</th>
+                                <th scope="col">Sell Type</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Downloded Date/Time</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                            {
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>@item.noteViewModel.noteTitle</td>
+                                    <td>@item.categoryViewModel.categoryName</td>
+                                    <td>@item.userViewModel.emailID</td>
+                                    <td>+91 9876543215</td>
+                                    @if (item.downloadViewModel.isPaid)
+                                    {
+                                        <td> Paid </td>
+                                    }
+                                    else
+                                    {
+                                        <td> Free </td>
+
+                                    }
+                                    <td>@item.noteViewModel.sellingPrice</td>
+                                    <td>@item.downloadViewModel.attachementDownloadDate</td>
+                                    <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    <td>
+
+                                        <div class="dropdown">
+                                            <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="/user/BuyerRequest?buyerId=@item.downloadViewModel.downloader&bookId=@item.downloadViewModel.noteID" class="dropdown-item">Allow Download</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="pagination-container">
+                <ul class="pagination">
+                    <li><img src="~/Content/images/searchnote/left-arrow.png" class="prev"></li>
+                    <li class="pgno active"><a href="#">1</a></li>
+                    <li class="pgno"><a href="#">2</a></li>
+                    <li class="pgno"><a href="#">3</a></li>
+                    <li class="pgno"><a href="#">4</a></li>
+                    <li class="pgno"><a href="#">5</a></li>
+                    <li><a href="#"><img src="~/Content/images/searchnote/right-arrow.png" class="next"></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>

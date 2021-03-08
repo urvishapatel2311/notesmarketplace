@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div>
+        <section id="contactus">
+            <!-- up Background photo -->
+            <div id="bg-half" class="image-fluid">
+                <!-- heading of page -->
+                <div id="page-heading" class="text-center">
+                    <h1>Contact Us</h1>
+                </div>
+            </div>
+            <div class="content-box-md">
+                <div class="container">
+                    <!-- General heading -->
+                    <div class="general-heading">
+                        <h3>Get in Touch</h3>
+                        <p>Let us know how to get back to you</p>
+                    </div>
+                    <div class="contact">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-lg-6 fo">
+                                    <div class="form-content">
+                                        <div class="form-group">
+                                            <label for="fullname">Full Name *</label>
+                                            @Html.TextBox("fullname", null, new { @class = "form-control", @placeholder = "Enter your full name", @required = "required", @name = "fullname" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email Address *</label>
+                                            @Html.TextBox("email", null, new { @class = "form-control", @type = "email", @placeholder = "Enter your email address", @required = "required", @name = "email" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sub">Subject *</label>
+                                            @Html.TextBox("sub", null, new { @class = "form-control", @placeholder = "Enter your subject", @required = "required", @name = "sub" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-lg-6 com">
+                                    <div class="form-content">
+                                        <div class="form-group">
+                                            <label for="comment">Comments / Questions *</label>
+                                            @Html.TextArea("comment", new { @placeholder = "Comments...", @class = "form-control", @required = "required" ,@name="comment"})
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="btn-user" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>

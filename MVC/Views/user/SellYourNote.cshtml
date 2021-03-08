@@ -1,0 +1,257 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+}
+
+    <div>
+        <section id="dashboard" class="table-page">
+            <!--Dashbord-->
+            <div class="content-box-md">
+                <div class="container">
+                    <!-- General heading -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="general-heading">
+                                <h3>Dashboard</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="dash2">
+                                <button id="btn-head-add-note" type="submit" class="btn btn-primary btn-head-add-note">Add Note</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="my-earn">
+                        <!-- left -->
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 dash-left">
+                            <div class="row earning">
+                                <!-- Earning -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div class="dash box-01">
+                                        <img src="~/Content/images/icon-image/earning-icon.svg" alt="My earning">
+                                        <h4>My Earning</h4>
+                                    </div>
+                                </div>
+                                <!-- number of notes -->
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                                    <div class="row">
+                                        <!-- Number of notes sell -->
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <div class="dash text-center box-02">
+                                                <h4>100</h4>
+                                                <p>Number Of Sold Notes</p>
+                                            </div>
+                                        </div>
+                                        <!-- Money Earned  -->
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            <div class="dash text-center box-03">
+                                                <h4>&#36;10,000</h4>
+                                                <p>Money Earned</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right -->
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 dash-right2">
+                            <div class="row mynote-info">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <div>
+                                        <!-- Number of notes sell -->
+                                        <div class="dash text-center dash-right box-04">
+                                            <h4>38</h4>
+                                            <p>My Downloads</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <!-- Number of notes sell -->
+                                    <div class="dash text-center dash-right box-05">
+                                        <h4>12</h4>
+                                        <p>My Rejected Notes</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                    <!-- Number of notes sell -->
+                                    <div class="dash text-center dash-right box-06">
+                                        <h4>102</h4>
+                                        <p>Buyer Requests</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row first-table">
+                        <div class="col-md-4">
+                            <div class="filter-heading">
+                                <h4>In Progress Notes</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="search-box buy2 has-search">
+                                <input type="search" class="form-control search-icon" id="search2" placeholder="Search">
+                                <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Added Date</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Data Science</td>
+                                        <td>Science</td>
+                                        <td>Draft</td>
+                                        <td>
+                                            <img src="~/Content/images/icon-image/edit.png" class="edit-icon">
+                                            <img src="~/Content/images/icon-image/delete.png" class="delete">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Accounts</td>
+                                        <td>Commerce</td>
+                                        <td>In Review</td>
+                                        <td>
+                                            <img src="~/Content/images/icon-image/eye.png" class="eye-img">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Social Studies</td>
+                                        <td>Social</td>
+                                        <td>Submitted</td>
+                                        <td>
+                                            <img src="~/Content/images/icon-image/eye.png" class="eye-img">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>AI</td>
+                                        <td>IT</td>
+                                        <td>Draft</td>
+                                        <td>
+                                            <img src="~/Content/images/icon-image/eye.png" class="eye-img">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Data Science</td>
+                                        <td>Lorem</td>
+                                        <td>Draft</td>
+                                        <td>
+                                            <img src="~/Content/images/icon-image/edit.png" class="edit-icon">
+                                            <img src="~/Content/images/icon-image/delete.png" class="delete">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--progressNotes 01 table End-->
+                        <div class="pagination-container col-md-12">
+                            <ul class="pagination">
+                                <li><img src="~/Content/images/searchnote/left-arrow.png" class="prev"></li>
+                                <li class="pgno active"><a href="#">1</a></li>
+                                <li class="pgno"><a href="#">2</a></li>
+                                <li class="pgno"><a href="#">3</a></li>
+                                <li class="pgno"><a href="#">4</a></li>
+                                <li class="pgno"><a href="#">5</a></li>
+                                <li><a href="#"><img src="~/Content/images/searchnote/right-arrow.png" class="next"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row second-table">
+                        <div class="col-md-4">
+                            <div class="filter-heading">
+                                <h4>Published Notes</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="search-box buy2 has-search">
+                                <input type="search" class="form-control search-icon" id="search2" placeholder="Search">
+                                <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Added Date</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Sell Type</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Data Science</td>
+                                        <td>Science</td>
+                                        <td>Paid</td>
+                                        <td>$575</td>
+                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Account</td>
+                                        <td>Commerce</td>
+                                        <td>Free</td>
+                                        <td>$0</td>
+                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Social Studies</td>
+                                        <td>Social</td>
+                                        <td>Paid</td>
+                                        <td>$575</td>
+                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>AI</td>
+                                        <td>IT</td>
+                                        <td>Free</td>
+                                        <td>$0</td>
+                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>05-01-2021</td>
+                                        <td>Data Science</td>
+                                        <td>Science</td>
+                                        <td>Paid</td>
+                                        <td>$575</td>
+                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            <li><img src="~/Content/images/searchnote/left-arrow.png" class="prev"></li>
+                            <li class="pgno active"><a href="#">1</a></li>
+                            <li class="pgno"><a href="#">2</a></li>
+                            <li class="pgno"><a href="#">3</a></li>
+                            <li class="pgno"><a href="#">4</a></li>
+                            <li class="pgno"><a href="#">5</a></li>
+                            <li><a href="#"><img src="~/Content/images/searchnote/right-arrow.png" class="next"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
