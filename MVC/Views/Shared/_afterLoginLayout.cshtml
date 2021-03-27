@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using NotesMarketPlace.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <!-- important meta tags -->
@@ -6,11 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Compatible with browser -->
     <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0 ,user-scalable=no">
 
-    <title>NotesMarketPlace</title>
+    <title>@ViewBag.Title - NoteMarketPlace</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/images/favicon/favicon.ico">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome/css/font-awesome.min.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/Content/css/bootstrap/bootstrap.min.css">
@@ -59,20 +65,32 @@
                         </li>
 
                         <div class="dropdown">
-                            <a class="nav-link" href="#" id="profile-photo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/user-img.png" alt="User Photo"></span></a>
+                            <a class="nav-link" href="#" id="profile-photo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span>
+                                    @if (CommonViewModel.profileViewModel?.profilePicture != null)
+                                    {
+                                        <img src="@Url.Content(CommonViewModel.profileViewModel.profilePicture)" style=" width: 50px;" alt="User Photo" class="img-responsive img-fluid">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Image/DefaultUserIcon.png" alt="User Photo" class="img-responsive img-fluid">
+                                    }
+                                    @*<img src="~/Content/images/icon-image/user-img.png" alt="User Photo">*@
+                                </span>
+                            </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a class="dropdown-item" href="user_profile.html">My Profile</a></li>
-                                <li><a class="dropdown-item" href="myDownload.html">My Downloads</a></li>
-                                <li><a class="dropdown-item" href="mySoldNotes.html">My Sold Notes</a></li>
-                                <li><a class="dropdown-item" href="myRejectedNote.html">My Rejected Notes</a></li>
-                                <li><a class="dropdown-item" href="changepwd.html">Change Password</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("UserProfile", "user")">My Profile</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyDownload", "user")">My Downloads</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MySoldNotes", "user")">My Sold Notes</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyRejectedNote", "user")">My Rejected Notes</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ChangePassword", "user")">Change Password</a></li>
                                 <li class="link-login"><a class="dropdown-item" href="@Url.Action("Logout", "user")"><span>Logout</span></a></li>
                             </ul>
                         </div>
 
 
                         <li class="nav-item">
-                            <a class="nav-link" id="mynavbtn">Logout</a>
+                            <a class="nav-link" id="mynavbtn" href="@Url.Action("Logout", "user")">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -111,7 +129,7 @@
                                         <li><a class="dropdown-item" href="myDownload.html">My Downloads</a></li>
                                         <li><a class="dropdown-item" href="mySoldNotes.html">My Sold Notes</a></li>
                                         <li><a class="dropdown-item" href="myRejectedNote.html">My Rejected Notes</a></li>
-                                        <li><a class="dropdown-item" href="changepwd.html">Change Password</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("ChangePassword", "user")">Change Password</a></li>
                                         <li><a class="dropdown-item" href="@Url.Action("Logout", "user")">Logout</a></li>
                                     </ul>
                                 </div>

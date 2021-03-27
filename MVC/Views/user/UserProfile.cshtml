@@ -1,0 +1,200 @@
+﻿@model NotesMarketPlace.Models.ViewModel
+@{
+    Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    ViewBag.Title = "User Profile";
+}
+
+<section id="userprofile">
+    <!-- up Background photo -->
+    <div id="bg-half" class="image-fluid">
+        <!-- heading of page -->
+        <div id="page-heading" class="text-center">
+            <h1>User Profile</h1>
+        </div>
+    </div>
+
+    <div class="content-box-md">
+        <div class="container">
+            <form method="post" enctype="multipart/form-data">
+                <!-- General heading -->
+                <div class="general-heading" id="user-detail-01">
+                    <h3>Basic Profile Details</h3>
+                </div>
+                <div class="user-p">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="fname">First Name *</label>
+                                    @Html.TextBox("fname", (string)ViewBag.fname, new { @id = "fname", @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="lname">Last Name *</label>
+                                    @Html.TextBox("lname", (string)ViewBag.lname, new { @id = "lname", @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    @Html.TextBox("email", (string)ViewBag.emailadd, new { @id = "email", @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="dob">Date Of Birth</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.dob, new { type = "date", @id = "dob", @placeholder = "Enter your date of birth", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    @Html.DropDownListFor(m => m.profileViewModel.gender, ViewBag.GenderList as SelectList, "Select your gender", new { @class = "form-control dropdown-icon", @id = "ddg" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="phn">Phone Number</label>
+
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 col-sm-3">
+                                            @Html.DropDownListFor(m => m.profileViewModel.countryCode_phoneNo, ViewBag.CountryCodeList as SelectList, "", new { @class = "form-control dropdown-icon", @id = "phn-profile" })
+                                            @Html.ValidationMessageFor(model => model.profileViewModel.countryCode_phoneNo, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-9 col-lg-9 col-sm-9">
+                                            @*<input type="number" class="form-control" id="phn" placeholder="Enter your phone number">*@
+                                            @Html.TextBoxFor(m => m.profileViewModel.phoneNo, new { type = "number", @id = "phn", @placeholder = "Enter your phone number", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.profileViewModel.phoneNo, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="profilepic">Profile Picture</label>
+                                    <div class="upload text-center">
+                                        <input type="file" accept="image/*" name="profileImage">
+                                        <label class="file text-center" for="file">
+                                            <img src="~/Content/images/User-Profile/upload.png">
+                                            <p>Upload a Picture</p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-heading" id="user-detail-02">
+                    <h3>Address Details</h3>
+                </div>
+                <div class="user-p">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="address">Address line 1 *</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.addressLine1, new { placeholder = "Enter your address", @class = "form-control", id = "address" })
+                                    @Html.ValidationMessageFor(model => model.profileViewModel.addressLine1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="address2">Address line 2</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.addressLine2, new { placeholder = "Enter your address", @class = "form-control", id = "address2" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.city, new { placeholder = "Enter your city", @class = "form-control", id = "city" })
+                                    @Html.ValidationMessageFor(model => model.profileViewModel.city, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="state">State *</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.state, new { placeholder = "Enter your state", @class = "form-control", id = "state" })
+                                    @Html.ValidationMessageFor(model => model.profileViewModel.state, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="zip">ZipCode *</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.zipcode, new { placeholder = "Enter your zipcode", @class = "form-control", id = "zip" })
+                                    @Html.ValidationMessageFor(model => model.profileViewModel.zipcode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="email">Country*</label>
+                                    @Html.DropDownListFor(m => m.profileViewModel.country, ViewBag.CountryLists as SelectList, "Select your country", new { @class = "form-control dropdown-icon", @id = "country" })
+                                    @Html.ValidationMessageFor(model => model.profileViewModel.country, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-heading" id="user-detail-03">
+                    <h3>University and College Information</h3>
+                </div>
+                <div class="user-p" id="user-detail-03">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="uni">University</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.university, new { placeholder = "Enter your university", @class = "form-control", id = "uni" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="clg">collage</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.college, new { placeholder = "Enter your collage", @class = "form-control", id = "clg" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (ViewBag.isPageOfEdit)
+                {
+                    @Html.HiddenFor(m => m.profileViewModel.id)
+                    <button id="btn-user" type="submit" class="btn btn-primary btn-block" name="command" value="update">Update</button>
+                }
+                else
+                {
+                    <button id="btn-user" type="submit" class="btn btn-primary btn-block">Submit</button>
+                }
+
+            </form>
+        </div>
+    </div>
+</section>

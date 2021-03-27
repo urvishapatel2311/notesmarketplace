@@ -112,6 +112,7 @@
           <Property Name="modifiedBy" Type="int" />
           <Property Name="isActive" Type="bit" Nullable="false" />
           <Property Name="filePath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isNoteDetailSet" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblNoteReportedIsuues">
           <Key>
@@ -200,6 +201,7 @@
           <Property Name="createdBy" Type="int" />
           <Property Name="modifiedDate" Type="datetime" />
           <Property Name="modifiedBy" Type="int" />
+          <Property Name="isProfileSet" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserRoles">
           <Key>
@@ -243,7 +245,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_downloads_users">
+        <Association Name="FK_downloads_seller">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
           <End Role="tblDownloads" Type="Self.tblDownloads" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,18 +254,6 @@
             </Principal>
             <Dependent Role="tblDownloads">
               <PropertyRef Name="seller" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_downloads_users1">
-          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
-          <End Role="tblDownloads" Type="Self.tblDownloads" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUsers">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblDownloads">
-              <PropertyRef Name="downloader" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -312,66 +302,6 @@
             </Principal>
             <Dependent Role="tblNoteAttachement">
               <PropertyRef Name="noteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_noteDetails_manageNoteCategory">
-          <End Role="tblManageNoteCategory" Type="Self.tblManageNoteCategory" Multiplicity="1" />
-          <End Role="tblNoteDetails" Type="Self.tblNoteDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblManageNoteCategory">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblNoteDetails">
-              <PropertyRef Name="noteCategory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_noteDetails_manageNoteType">
-          <End Role="tblManageNoteType" Type="Self.tblManageNoteType" Multiplicity="0..1" />
-          <End Role="tblNoteDetails" Type="Self.tblNoteDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblManageNoteType">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblNoteDetails">
-              <PropertyRef Name="noteType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_noteDetails_refereneceData">
-          <End Role="tblReferenceData" Type="Self.tblReferenceData" Multiplicity="1" />
-          <End Role="tblNoteDetails" Type="Self.tblNoteDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblReferenceData">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblNoteDetails">
-              <PropertyRef Name="status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_noteDetails_users">
-          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
-          <End Role="tblNoteDetails" Type="Self.tblNoteDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUsers">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblNoteDetails">
-              <PropertyRef Name="sellerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_noteDetails_users1">
-          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
-          <End Role="tblNoteDetails" Type="Self.tblNoteDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblUsers">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tblNoteDetails">
-              <PropertyRef Name="actionedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -447,6 +377,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblDownloads_downloader">
+          <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
+          <End Role="tblDownloads" Type="Self.tblDownloads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblDownloads">
+              <PropertyRef Name="downloader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_userProfile_users">
           <End Role="tblUsers" Type="Self.tblUsers" Multiplicity="1" />
           <End Role="tblUserProfile" Type="Self.tblUserProfile" Multiplicity="*" />
@@ -489,11 +431,7 @@
             <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
             <End Role="tblDownloads" EntitySet="tblDownloads" />
           </AssociationSet>
-          <AssociationSet Name="FK_downloads_users" Association="Self.FK_downloads_users">
-            <End Role="tblUsers" EntitySet="tblUsers" />
-            <End Role="tblDownloads" EntitySet="tblDownloads" />
-          </AssociationSet>
-          <AssociationSet Name="FK_downloads_users1" Association="Self.FK_downloads_users1">
+          <AssociationSet Name="FK_downloads_seller" Association="Self.FK_downloads_seller">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblDownloads" EntitySet="tblDownloads" />
           </AssociationSet>
@@ -512,26 +450,6 @@
           <AssociationSet Name="FK_noteAttachement_noteDetails" Association="Self.FK_noteAttachement_noteDetails">
             <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
             <End Role="tblNoteAttachement" EntitySet="tblNoteAttachement" />
-          </AssociationSet>
-          <AssociationSet Name="FK_noteDetails_manageNoteCategory" Association="Self.FK_noteDetails_manageNoteCategory">
-            <End Role="tblManageNoteCategory" EntitySet="tblManageNoteCategory" />
-            <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_noteDetails_manageNoteType" Association="Self.FK_noteDetails_manageNoteType">
-            <End Role="tblManageNoteType" EntitySet="tblManageNoteType" />
-            <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_noteDetails_refereneceData" Association="Self.FK_noteDetails_refereneceData">
-            <End Role="tblReferenceData" EntitySet="tblReferenceData" />
-            <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_noteDetails_users" Association="Self.FK_noteDetails_users">
-            <End Role="tblUsers" EntitySet="tblUsers" />
-            <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_noteDetails_users1" Association="Self.FK_noteDetails_users1">
-            <End Role="tblUsers" EntitySet="tblUsers" />
-            <End Role="tblNoteDetails" EntitySet="tblNoteDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_noteReportedIsuues_downloads" Association="Self.FK_noteReportedIsuues_downloads">
             <End Role="tblDownloads" EntitySet="tblDownloads" />
@@ -556,6 +474,10 @@
           <AssociationSet Name="FK_noteReviews_users" Association="Self.FK_noteReviews_users">
             <End Role="tblUsers" EntitySet="tblUsers" />
             <End Role="tblNoteReviews" EntitySet="tblNoteReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblDownloads_downloader" Association="Self.FK_tblDownloads_downloader">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="tblDownloads" EntitySet="tblDownloads" />
           </AssociationSet>
           <AssociationSet Name="FK_userProfile_users" Association="Self.FK_userProfile_users">
             <End Role="tblUsers" EntitySet="tblUsers" />
@@ -697,6 +619,7 @@
           <NavigationProperty Name="tblNoteReportedIsuues" Relationship="Self.FK_noteReportedIsuues_noteDetails" FromRole="tblNoteDetails" ToRole="tblNoteReportedIsuues" />
           <NavigationProperty Name="tblNoteReviews" Relationship="Self.FK_noteReviews_noteDetails" FromRole="tblNoteDetails" ToRole="tblNoteReviews" />
           <Property Name="filePath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="isNoteDetailSet" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tblNoteReportedIsuue">
           <Key>
@@ -793,6 +716,7 @@
           <Property Name="modifiedDate" Precision="3" Type="DateTime" />
           <Property Name="modifiedBy" Type="Int32" />
           <NavigationProperty Name="tblUser" Relationship="Self.FK_userProfile_users" FromRole="tblUserProfile" ToRole="tblUsers" />
+          <Property Name="isProfileSet" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserRole">
           <Key>
@@ -1262,6 +1186,7 @@
           <EntitySetMapping Name="tblNoteDetails">
             <EntityTypeMapping TypeName="notesmarketplaceModel.tblNoteDetail">
               <MappingFragment StoreEntitySet="tblNoteDetails">
+                <ScalarProperty Name="isNoteDetailSet" ColumnName="isNoteDetailSet" />
                 <ScalarProperty Name="filePath" ColumnName="filePath" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="sellerID" ColumnName="sellerID" />
@@ -1361,6 +1286,7 @@
           <EntitySetMapping Name="tblUserProfiles">
             <EntityTypeMapping TypeName="notesmarketplaceModel.tblUserProfile">
               <MappingFragment StoreEntitySet="tblUserProfile">
+                <ScalarProperty Name="isProfileSet" ColumnName="isProfileSet" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="dob" ColumnName="dob" />

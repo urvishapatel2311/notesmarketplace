@@ -1,0 +1,211 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    int i = 0;
+    ViewBag.Title = "My Downloads";
+}
+<section id="mydownload" class="table-page">
+    <div class="content-box-md">
+        <div class="container">
+                <!-- General heading -->
+                <div class="row buy">
+                    <div class="col-md-4">
+                        <div class="com-heading">
+                            <h3>My Downloads</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <form method="post">
+                            <div class="search-box buy2 pull-right has-search">
+                                @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                                <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sr No.</th>
+                                <th scope="col">@Html.ActionLink("Note Title", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title" })</th>
+                                <th scope="col">@Html.ActionLink("Category", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                                <th scope="col">@Html.ActionLink("Buyer", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer" })</th>
+                                <th scope="col">@Html.ActionLink("Sell Type", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type" })</th>
+                                <th scope="col">@Html.ActionLink("Price", "MyDownload", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" })</th>
+                                <th scope="col"></th>
+                                <th scope="col">Downloded Date/Time</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(i += 1)</th>
+                                    <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
+                                    <td>@item.categoryViewModel.categoryName</td>
+                                    <td>@item.userViewModel.emailID</td>
+                                    @if (item.downloadViewModel.isPaid)
+                                    {
+                                        <td> Paid </td>
+                                    }
+                                    else
+                                    {
+                                        <td> Free </td>
+
+                                    }
+                                    <td>$@item.noteViewModel.sellingPrice</td>
+                                    <td></td>
+                                    <td>@item.noteViewModel.createdDate</td>
+                                    <td><a href="/user/NoteDetails?id=@item.noteViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></a></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li><a href="/user/DownloadBookfromMyWindow?bookId=@item.downloadViewModel.noteID" class="dropdown-item">Download Note</a></li>
+                                                @*<li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal1-@item.downloadViewModel.id">Add Reviews/Feedback</a></li>*@
+                                                <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#exampleModal" id="reviewcode" onclick="addReview('@item.downloadViewModel.noteID')">Add Reviews/Feedback</a></li>
+                                                <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#exampleModal2" onclick="addReview('@item.downloadViewModel.noteID')">Report as Inappropriate</a></li>
+                                            </ul>
+                                            <!-- Modal for Report as inappropriate -->
+                                            <div class="modal fade feedbackDetails" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+
+                                                    @using (Html.BeginForm("ReportAsInappropriate", "User", FormMethod.Post, new { }))
+                                                    {
+
+                                                        <div class="modal-content review-modal inappropriate-modal">
+                                                            <div class="modal-body">
+                                                                <div class="reportin general-heading"id="exampleModalLabel">
+                                                                    <h3>Report as Inappropriate</h3>
+                                                                </div>
+                                                                @Html.Label("noteTitle", "Note Title")
+                                                                @Html.TextBoxFor(m => item.downloadViewModel.noteTitle, new { @class = "form-control", @id = "exampleInput", @readonly = "true" })
+
+                                                                <input type="hidden" name="dID" id="bookid2" />
+                                                                <div class="form-group">
+                                                                    @Html.Label("remarks", "Remarks")
+                                                                    <textarea type="text" rows="3" class="form-control" placeholder="Comments..." name="inappropriateComment" required></textarea>
+                                                                </div>
+                                                                <button type="submit" id="btnIssue" class="btn-inappropriate btn">Report An Issue</button>
+                                                                <button type="button" id="btnCancel" class="btn-in-cancel btn " data-dismiss="modal">Cancel</button>
+                                                            </div>
+
+                                                        </div>}
+                                                </div>
+                                            </div>
+                                            <!-- End of Modal for Report as inappropriate -->
+                                            <!-- Modal for Report as inappropriate -->
+                                            @*<div class="modal fade" id="modal2-@item.downloadViewModel.id" tabindex="-1" role="dialog" aria-labelledby="modal1-label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content review-modal inappropriate-modal">
+
+                    <div class="modal-body">
+                        @using (Html.BeginForm("ReportAsInappropriate", "user", new { id = item.downloadViewModel.id }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="modal-body" id="report">
+                                <div class="reportin general-heading">
+                                    <h3>Report as Inappropriate</h3>
+                                </div>
+                                @Html.Label("noteTitle", "Note Title")
+                                @Html.TextBoxFor(m => item.downloadViewModel.noteTitle, new { @class = "form-control", @id = "exampleInput", @readonly = "true" })
+
+                                @Html.Label("remarks", "Remarks")
+                                @Html.TextAreaFor(m => item.NoteReportedIsuue.remarks, new { @class = "form-control modalinput-tag", @id = "exampleTextArea" })
+                                @Html.ValidationMessageFor(m => item.NoteReportedIsuue.remarks, "", new { @style = "color:red;" })
+                                <button type="submit" id="btnIssue" class="btn-inappropriate btn  ">Report An Issue</button>
+                                <button type="button" id="btnCancel" class="btn-in-cancel btn " data-dismiss="modal">Cancel</button>
+
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
+                                            <!-- End of Modal for Report as inappropriate -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <script>
+                        function addReview(id) {
+                            document.getElementById("bookid").setAttribute("value", id);
+                            document.getElementById("bookid2").setAttribute("value", id);
+                        }
+                    </script>
+                    <!-- Modal for Add review -->
+                    <div class="modal fade feedbackDetails" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+
+                            @using (Html.BeginForm("AddReview", "User", FormMethod.Post, new { }))
+                            {
+
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content review-modal">
+
+                                        <div class="modal-body add-review">
+                                            <div class="modal-head general-heading ">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="~/content/images/icon-image/close.png"></span></button>
+                                                <h3 class="modal-title">Add Review</h3>
+                                            </div>
+
+                                            <fieldset class="rating ">
+                                                <input type="radio" id="star5" name="rate" value="5" />
+                                                <label for="star5" title="text"></label>
+                                                <input type="radio" id="star4" name="rate" value="4" />
+                                                <label for="star4" title="text"></label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text"></label>
+                                                <input type="radio" id="star2" name="rate" value="2" />
+                                                <label for="star2" title="text"></label>
+                                                <input type="radio" id="star1" name="rate" value="1" />
+                                                <label for="star1" title="text"></label>
+                                            </fieldset>
+
+                                            <div class="form-group">
+
+                                                <label class="mylabel" for="comment">Comments</label>
+                                                <textarea type="text" rows="4" class="form-control" id="cmt" placeholder="Comments..." name="ratingComment" required></textarea>
+
+                                                <input type="hidden" name="dID" id="bookid" />
+                                                <button type="submit" class="btn btn-primary btn-review"><b>submit</b></button>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                
+
+                                     
+                                    </div>}
+                                </div>
+                            </div>
+                    <!-- End of Modal for Add review -->
+
+                   </div>
+        </div>
+        
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("MyDownload", "user", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+            {
+                ContainerDivClasses = null,
+                LiElementClasses = new string[] { "pgno" },
+                UlElementClasses = new string[] { "pagination" },
+                LinkToPreviousPageFormat = "<",
+                LinkToNextPageFormat = ">",
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never
+            })
+        </div>
+    </div>
+</section>

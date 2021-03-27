@@ -12,7 +12,8 @@ namespace NotesMarketPlace.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.ComponentModel;
+
     public partial class tblUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,7 +30,7 @@ namespace NotesMarketPlace.Models
             this.tblNoteReviews = new HashSet<tblNoteReview>();
             this.tblUserProfiles = new HashSet<tblUserProfile>();
         }
-    
+
         public int id { get; set; }
         public int roleID { get; set; }
 
@@ -55,12 +56,15 @@ namespace NotesMarketPlace.Models
         [System.ComponentModel.DataAnnotations.Compare("password")]
         public string Confirmpassword { get; set; }
 
+        [DisplayName("Rememberme")]
+        public bool Rememberme { get; set; }
+
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<int> createdBy { get; set; }
         public Nullable<System.DateTime> modifiedDate { get; set; }
         public Nullable<int> modifiedBy { get; set; }
         public bool isActive { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDownload> tblDownloads { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

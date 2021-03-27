@@ -5,9 +5,6 @@
     ViewBag.Title = "AddNote";
 }
 
- 
-
-
 <div>
 
     <section id="addnotes">
@@ -26,14 +23,24 @@
                     <div class="general-heading" id="user-detail-01">
                         <h3>Basic Note Details</h3>
                     </div>
-                    @ViewBag.Saved
+                    <span style="color: green; font-size:28px;"><b>@ViewBag.Saved</b></span>
+                    <span style="color: green; font-size:28px;"><b>@ViewBag.data</b></span>
                     <div class="user-p">
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="form-content">
                                     <div class="form-group">
                                         <label for="title">Title *</label>
-                                        @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title" })
+                                        @*@if (ViewBag.isPageOfEdit)
+                                        {*@
+                                            @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title"})
+                                        @*}
+                                        else
+                                        {
+                                            @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title" })
+                                        }*@
+
+                                        @Html.ValidationMessageFor(model => model.noteTitle, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -42,6 +49,7 @@
                                     <div class="form-group">
                                         <label for="category">Category *</label>
                                         @Html.DropDownListFor(m => m.noteCategory, ViewBag.CategoryList as SelectList, "Select your category", new { @class = "form-control dropdown-icon" })
+                                        @Html.ValidationMessageFor(model => model.noteCategory, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +74,15 @@
                                     <div class="form-group">
                                         <label for="profilepic">Upload Notes *</label>
                                         <div class="upload text-center">
-                                            <input type="file" accept=".pdf" name="pdfFile">
+                                            @if (ViewBag.isPageOfEdit)
+                                            {
+                                                <input type="file" accept=".pdf" name="pdfFile">
+                                            }
+                                            else
+                                            {
+                                                <input required type="file" accept=".pdf" name="pdfFile">
+                                            }
+
                                             <label class="file text-center" for="file">
                                                 <img src="~/Content/images/User-Profile/upload.png">
                                                 <p>Upload your Notes</p>
@@ -96,6 +112,7 @@
                                     <div class="form-group">
                                         <label for="desc">Description *</label>
                                         @Html.TextAreaFor(m => m.description, new { placeholder = "Enter your description", @class = "form-control", @id = "desc" })
+                                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -180,29 +197,12 @@
                                 <div class="radio-content">
                                     <h6 for="sell">Sell For *</h6>
                                     <div class="radio-item ">
-                                        @*@if (Model.sellingPrice != 0)
-                            {
-                                @Html.RadioButtonFor(m => m.isPaid, new { @Name = "role", @id = "free", onclick = "Free()" })
-                            }
-                            else
-                            {*@
-                                        @Html.RadioButtonFor(m => m.isPaid,"Free", new { @Name = "role", @id = "free", onclick = "Free()"/*, @checked="checked" */})
-                                        @*}*@
-
+                                        @Html.RadioButtonFor(m => m.SelectedRadioButtonValue, "Free", new { @Name = "role", @id = "free", onclick = "Free()"/*, @checked="checked" */})
                                     </div>
 
                                     <label class="role" for="free">Free</label>
                                     <div class="radio-item">
-                                        @*@if (Model.sellingPrice != 0)
-                            {
-                                @Html.RadioButtonFor(m => m.isPaid, new { @Name = "role", @id = "paid", selected = true, onclick = "Sell()" })
-                            }
-                            else
-                            {*@
-                                        @Html.RadioButtonFor(m => m.isPaid,"Paid", new { @Name = "role", @id = "paid", onclick = "Sell()"})
-                                        @*}*@
-
-
+                                        @Html.RadioButtonFor(m => m.SelectedRadioButtonValue, "Paid", new { @Name = "role", @id = "paid", onclick = "Sell()" })
                                     </div>
 
                                     <label class="role" for="paid">Paid</label>
@@ -210,7 +210,8 @@
                                 <div class="form-content">
                                     <div class="form-group">
                                         <label for="sell-p">Sell Price *</label>
-                                        @Html.TextBoxFor(m => m.sellingPrice, new { placeholder = "Enter your price", @type = "number", @class = "form-control", @id = "sell-p"})
+                                        @Html.TextBoxFor(m => m.sellingPrice, new { placeholder = "Enter your price", @type = "number", @class = "form-control", @id = "sell-p" })
+                                        @Html.ValidationMessageFor(model => model.sellingPrice, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -229,29 +230,34 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button id="btn-user" type="submit" class="btn btn-primary" name="command" value="save">Save</button>
+                                @if (ViewBag.isPageOfEdit)
+                                {
+                                    @Html.HiddenFor(m => m.id)
+                                    <button id="btn-user" type="submit" class="btn btn-primary" name="command" value="update">Update</button>
+                                }
+                                else
+                                {
+                                    <button id="btn-user" type="submit" class="btn btn-primary" name="command" value="save">Save</button>
+                                }
+                                
 
-                                <button id="btn-publish" type="submit" class="btn btn-primary btn-head" name="command" value="publish" <!--data-toggle="modal" data-target="#exampleModalLong"-->>Publish</button>
+                                <button id="btn-publish" type="submit" class="btn btn-primary btn-head" name="command" value="publish"> <!--data-toggle="modal" data-target="#exampleModalLong"-->Publish</button>
 
-                                <!-- Modal
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-
-                <div class="popup-head text-center">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to publish?</h5>
-                </div>
-                <div class="popup-content">
-                    <p class="d-flex" style="color:black">Publishing this note will send note to administrator for review,once administrator review and approve then this note will be published to portal.Press yes to continue".</p>
-                    <button class="btn btn-primary" value="yes" name="updateStatus" id="btn-yes">yes</button>
-                    <button id="cancel" type="submit" class="btn btn-primary close-btn" name="updateStatus" value="cancel">Cancel</button>
-
-
-                </div>
-            </div>
-        </div>
-    </div>-->
+                                <!-- modal for publish note -->
+                                @*<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="popup-head text-center">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to publish?</h5>
+                                            </div>
+                                            <div class="popup-content">
+                                                <p class="d-flex" style="color:black">Publishing this note will send note to administrator for review,once administrator review and approve then this note will be published to portal.Press yes to continue".</p>
+                                                <button class="btn btn-primary" type="submit" value="publish" name="command" id="btn-yes">yes</button>
+                                                <button id="cancel" type="button" class="btn btn-primary close-btn" name="updateStatus" value="cancel">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
 
                             </div>
                         </div>

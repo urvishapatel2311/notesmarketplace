@@ -13,7 +13,7 @@ namespace NotesMarketPlace.Models
     using System.Collections.Generic;
     using System.Web;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class tblNoteDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +24,7 @@ namespace NotesMarketPlace.Models
             this.tblNoteReportedIsuues = new HashSet<tblNoteReportedIsuue>();
             this.tblNoteReviews = new HashSet<tblNoteReview>();
         }
-    
+
         public int id { get; set; }
 
         [Required]
@@ -69,12 +69,16 @@ namespace NotesMarketPlace.Models
 
         [Required]
         public string filePath { get; set; }
-    
+
+        public bool isNoteDetailSet { get; set; }
+
         public HttpPostedFileBase imgFile { get; set; }
 
         public HttpPostedFileBase pdfFile { get; set; }
 
         public HttpPostedFileBase notepreviewFile { get; set; }
+
+        public string SelectedRadioButtonValue { get; set; }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

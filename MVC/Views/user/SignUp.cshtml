@@ -1,115 +1,78 @@
 ﻿@model NotesMarketPlace.Models.tblUser
 
 @{
-    ViewBag.Title = "Register";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Sign Up";
 }
 
-<!DOCTYPE html>
+<div id="signup">
+    <section id="bg-full">
 
-<html>
-<head>
-    <!-- important meta tags -->
-    <meta charset="utf-8"> <!-- for encoding -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Compatible with browser -->
-    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0 ,user-scalable=no">
+        <div class="container">
 
-    <!-- title for project -->
-    <title>SignUp - NotesMarketPlace</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/Content/css/bootstrap/bootstrap.min.css">
-
-    <!-- Custome CSS -->
-    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css">
-
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="~/Content/css/responsive.css">
-</head>
-<body>
-    <div id="signup">
-        <section id="bg-full">
-
-            <div class="container">
-
-                <div class="row justify-content-center">
-                    <div class="col-md-12 text-center">
-                        <img src="~/Content/images/logo/top-logo.png">
-                    </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <img src="~/Content/images/logo/top-logo.png">
                 </div>
-
-                <div class="row justify-content-center logo-resize">
-                    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10 col-xs-12 col-12">
-                        <div class="form_container">
-                            <form method="post">
-                                <div class="first-line text-center">
-                                    <h1>Create An Account</h1>
-                                    <p>Enter your details to Signup</p>
-                                </div>
-                                <div id="register_status">
-                                    <p>
-                                        @if (ViewBag.error != null)
-                                        {
-                                            <span class="badge badge-danger">@ViewBag.error</span>
-                                        }
-                                    </p>
-                                </div>
-                                <div class="form-content">
-                                    <div class="form-group">
-                                        <label for="fname">First Name *</label>
-                                        @Html.TextBoxFor(m => m.firstName, new { placeholder = "Enter your first name", @class = "form-control", id = "fname"})
-                                        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="lname">Last Name *</label>
-                                        @Html.TextBoxFor(m => m.lastName, new { placeholder = "Enter your last name", @class = "form-control", id = "lname" })
-                                        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email *</label>
-                                        @Html.TextBoxFor(m => m.emailID, new { placeholder = "Enter your emailID", @class = "form-control", id = "email" })
-                                        @Html.ValidationMessageFor(model => model.emailID, "", new { @class = "text-danger" })
-                                       
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        @Html.PasswordFor(m => m.password, new { placeholder = "Enter your password", @class = "form-control", id = "password" })
-                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                                        
-                                        <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="pwdVisible()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cnfmpwd">Confirm Password</label><div id="divCheckPassword"></div>
-                                        @Html.PasswordFor(m => m.Confirmpassword, new { placeholder = "Re-enter your password", @class = "form-control", id = "cnfmpwd" })
-                                        @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
-                                        <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="confirmPwdVisible()">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-                                    <div class="link-for-registration">
-                                        <p class="text-center">Already have an account?<a href="@Url.Action("Login", "user")"> Login</a></p>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
-        </section>
+            <div class="row justify-content-center logo-resize">
+                <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10 col-xs-12 col-12">
+                    <div class="form_container">
+                        <form method="post">
+                            <div class="first-line text-center">
+                                <h1>Create An Account</h1>
+                                <p>Enter your details to Signup</p>
+                            </div>
+                            <div id="register_status">
+                                <p>
+                                    @if (ViewBag.error != null)
+                                    {
+                                        <span class="badge badge-danger">@ViewBag.error</span>
+                                    }
+                                </p>
+                            </div>
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="fname">First Name *</label>
+                                    @Html.TextBoxFor(m => m.firstName, new { placeholder = "Enter your first name", @class = "form-control", id = "fname" })
+                                    @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name *</label>
+                                    @Html.TextBoxFor(m => m.lastName, new { placeholder = "Enter your last name", @class = "form-control", id = "lname" })
+                                    @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    @Html.TextBoxFor(m => m.emailID, new { placeholder = "Enter your emailID", @class = "form-control", id = "email" })
+                                    @Html.ValidationMessageFor(model => model.emailID, "", new { @class = "text-danger" })
 
-        <!-- JQuery -->
-        <script src="~/Scripts/js/jquery.min.js"></script>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    @Html.PasswordFor(m => m.password, new { placeholder = "Enter your password", @class = "form-control", id = "password" })
+                                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
 
-        <!-- Bootstrap JS -->
-        <script src="~/Scripts/js/bootstrap/bootstrap.min.js"></script>
+                                    <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="pwdVisible()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cnfmpwd">Confirm Password</label><div id="divCheckPassword"></div>
+                                    @Html.PasswordFor(m => m.Confirmpassword, new { placeholder = "Re-enter your password", @class = "form-control", id = "cnfmpwd" })
+                                    @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
+                                    <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="changeVisible(this)">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                                <div class="link-for-registration">
+                                    <p class="text-center">Already have an account?<a href="@Url.Action("Login", "user")"> Login</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Custom JS -->
-        <script src="~/Scripts/js/script.js" type="text/javascript"></script>
+        </div>
 
-    </div>
-</body>
-</html>
+    </section>
+</div>

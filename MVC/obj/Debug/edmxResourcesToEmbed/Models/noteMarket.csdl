@@ -127,6 +127,7 @@
     <NavigationProperty Name="tblNoteReportedIsuues" Relationship="Self.FK_noteReportedIsuues_noteDetails" FromRole="tblNoteDetails" ToRole="tblNoteReportedIsuues" />
     <NavigationProperty Name="tblNoteReviews" Relationship="Self.FK_noteReviews_noteDetails" FromRole="tblNoteDetails" ToRole="tblNoteReviews" />
     <Property Name="filePath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="isNoteDetailSet" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="tblNoteReportedIsuue">
     <Key>
@@ -223,6 +224,7 @@
     <Property Name="modifiedDate" Precision="3" Type="DateTime" />
     <Property Name="modifiedBy" Type="Int32" />
     <NavigationProperty Name="tblUser" Relationship="Self.FK_userProfile_users" FromRole="tblUserProfile" ToRole="tblUsers" />
+    <Property Name="isProfileSet" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="tblUserRole">
     <Key>

@@ -11,22 +11,44 @@ namespace NotesMarketPlace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class tblUserProfile
     {
         public int id { get; set; }
+
+        [Required]
         public int userID { get; set; }
         public Nullable<System.DateTime> dob { get; set; }
         public string gender { get; set; }
         public string secondaryEmailID { get; set; }
+
+        [Required]
         public string countryCode_phoneNo { get; set; }
+
+        [Required]
         public string phoneNo { get; set; }
         public string profilePicture { get; set; }
+
+
+        //[AllowFileSize(FileSize = 5 * 1024 * 1024, ErrorMessage = "Maximum allowed file size is 5 MB")]
+        public HttpPostedFileBase profileImage { get; set; }
+
+        [Required]
         public string addressLine1 { get; set; }
         public string addressLine2 { get; set; }
+
+        [Required]
         public string city { get; set; }
+
+        [Required]
         public string state { get; set; }
+
+        [Required]
         public string zipcode { get; set; }
+
+        [Required]
         public string country { get; set; }
         public string university { get; set; }
         public string college { get; set; }
@@ -34,7 +56,8 @@ namespace NotesMarketPlace.Models
         public Nullable<int> createdBy { get; set; }
         public Nullable<System.DateTime> modifiedDate { get; set; }
         public Nullable<int> modifiedBy { get; set; }
-    
+        public bool isProfileSet { get; set; }
+
         public virtual tblUser tblUser { get; set; }
     }
 }

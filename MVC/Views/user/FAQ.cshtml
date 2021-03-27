@@ -1,177 +1,181 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (@Session["emailID"] == null)
+    {
+        Layout = "~/Views/Shared/_beforeLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    }
+    ViewBag.Title = "FAQ";
 }
 
-    <section id="faq">
-        <!-- up Background photo -->
-        <div id="bg-half" class="image-fluid">
-            <!-- heading of page -->
-            <div id="page-heading" class="text-center">
-                <h1>Frequently Asked Questions</h1>
-            </div>
+<section id="faq">
+    <!-- up Background photo -->
+    <div id="bg-half" class="image-fluid">
+        <!-- heading of page -->
+        <div id="page-heading" class="text-center">
+            <h1>Frequently Asked Questions</h1>
         </div>
+    </div>
 
-        <div class="content-box-md">
-            <div class="container">
+    <div class="content-box-md">
+        <div class="container">
 
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
 
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-                        <div id="que-part-01">
-                            <div class="general-heading">
+                    <div id="que-part-01">
+                        <div class="general-heading">
 
-                                <h3>General Questions</h3>
-                            </div>
-                            <div class="faq-que panel-group " id="accordian">
-
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question0">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">What is Marketplace Note?</a>
-
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-                                    </div>
-                                    <div id="question0" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">What do the University say?</a>
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-
-                                    </div>
-                                    <div id="question1" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question2">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">Is this legal?</a>
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-                                    </div>
-                                    <div id="question2" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3>General Questions</h3>
                         </div>
+                        <div class="faq-que panel-group " id="accordian">
 
-                        <div id="que-part-02">
-                            <div class="general-heading">
-                                <h3>Uploaders</h3>
-                            </div>
-                            <div class=" faq-que panel-group " id="faqAccordion">
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question0">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">What is Marketplace Note?</a>
 
-
-
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question3">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">What can't I sell?</a>
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-                                    </div>
-                                    <div id="question3" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
+                                        <i><img class="icon add-i" src="~/Content/images/icon-image/add.png" ></i>
+                                    </h4>
+                                </div>
+                                <div id="question0" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question4">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">What Notes can I sell?</a>
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-                                    </div>
-                                    <div id="question4" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question1">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">What do the University say?</a>
+                                        <i ><img src="~/Content/images/icon-image/add.png" class="icon add-i"></i>
+                                    </h4>
+                                </div>
+                                <div id="question1" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
                                     </div>
                                 </div>
-
                             </div>
+
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question2">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Is this legal?</a>
+                                        <i ><img src="~/Content/images/icon-image/add.png" class="icon add-i"></i>
+                                    </h4>
+
+                                </div>
+                                <div id="question2" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-
-                        <div id="que-part-03">
-                            <div class="general-heading">
-                                <h3>Downloaders</h3>
-                            </div>
-                            <div class="faq-que panel-group" id="faqAccordion">
-
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question5">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">How do I buy notes?</a>
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-                                    </div>
-                                    <div id="question5" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default ">
-                                    <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question6">
-                                        <h4 class="panel-title">
-                                            <a href="#" class="ing">Can I edit the notes I purchased?</a>
-                                            <i class="icon"><img src="~/Content/images/icon-image/add.png" class="add-i"></i>
-                                        </h4>
-
-                                    </div>
-                                    <div id="question6" class="panel-collapse collapse" style="height: 0px;">
-                                        <div class="panel-body">
-                                            <p>
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <!--/panel-group-->
-                </div>
+                    <div id="que-part-02">
+                        <div class="general-heading">
+                            <h3>Uploaders</h3>
+                        </div>
+                        <div class=" faq-que panel-group " id="faqAccordion">
 
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question3">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">What can't I sell?</a>
+                                        <i ><img src="~/Content/images/icon-image/add.png" class="icon add-i"></i>
+                                    </h4>
+
+                                </div>
+                                <div id="question3" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question4">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">What Notes can I sell?</a>
+                                        <i ><img src="~/Content/images/icon-image/add.png" class="icon add-i"></i>
+                                    </h4>
+
+                                </div>
+                                <div id="question4" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="que-part-03">
+                        <div class="general-heading">
+                            <h3>Downloaders</h3>
+                        </div>
+                        <div class="faq-que panel-group" id="faqAccordion">
+
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question5">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">How do I buy notes?</a>
+                                        <i ><img src="~/Content/images/icon-image/add.png" class="icon add-i"></i>
+                                    </h4>
+
+                                </div>
+                                <div id="question5" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default ">
+                                <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question6">
+                                    <h4 class="panel-title">
+                                        <a href="#" class="ing">Can I edit the notes I purchased?</a>
+                                        <i ><img src="~/Content/images/icon-image/add.png" class="icon add-i"></i>
+                                    </h4>
+
+                                </div>
+                                <div id="question6" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint qui ratione veritatis atque illo maxime veniam obcaecati.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>

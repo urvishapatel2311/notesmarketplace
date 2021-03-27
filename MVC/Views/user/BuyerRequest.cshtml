@@ -1,8 +1,10 @@
-﻿@model IEnumerable<NotesMarketPlace.Models.ViewModel> 
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
 @using PagedList
 @using PagedList.Mvc
 @{
     Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    ViewBag.Title = "Buyer Requests";
+    int rowNo = 0;
 }
 
 <div>
@@ -10,6 +12,7 @@
     <section id="buyerrequest" class="table-page">
         <div class="content-box-md">
             <div class="container">
+
                 <!-- General heading -->
                 <div class="row buy">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -17,35 +20,40 @@
                             <h3>Buyer Requests</h3>
                         </div>
                     </div>
+
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <div class="search-box buy2 has-search">
-                            <input type="search" class="form-control search-icon" id="search2" placeholder="Search" name="searching" value="@ViewData["GetBuyersDetails"]">
-                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
-                        </div>
+                        <form method="post">
+                            <div class="search-box buy2 has-search">
+                                @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                                <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table">
+
                         <thead>
                             <tr>
                                 <th scope="col">Sr No.</th>
-                                <th scope="col">Note Title</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Buyer</th>
+                                <th scope="col">@Html.ActionLink("Note Title", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title" })</th>
+                                <th scope="col">@Html.ActionLink("Category", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                                <th scope="col">@Html.ActionLink("Buyer", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Buyer" })</th>
                                 <th scope="col">Phone No.</th>
-                                <th scope="col">Sell Type</th>
-                                <th scope="col">Price</th>
+                                <th scope="col">@Html.ActionLink("Sell Type", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type" })</th>
+                                <th scope="col">@Html.ActionLink("Price", "BuyerRequest", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" })</th>
                                 <th scope="col">Downloded Date/Time</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
                             {
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>@item.noteViewModel.noteTitle</td>
+                                    <th scope="row">@(rowNo += 1)</th>
+                                    <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
                                     <td>@item.categoryViewModel.categoryName</td>
                                     <td>@item.userViewModel.emailID</td>
                                     <td>+91 9876543215</td>
@@ -59,36 +67,37 @@
 
                                     }
                                     <td>@item.noteViewModel.sellingPrice</td>
-                                    <td>@item.downloadViewModel.attachementDownloadDate</td>
-                                    <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                    <td>@item.noteViewModel.createdDate</td>
+                                    <td><a href="/user/NoteDetails?id=@item.noteViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></a></td>
                                     <td>
-
                                         <div class="dropdown">
                                             <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li><a href="/user/BuyerRequest?buyerId=@item.downloadViewModel.downloader&bookId=@item.downloadViewModel.noteID" class="dropdown-item">Allow Download</a></li>
+                                                <li><a href="/user/BuyerRequest?buyerId=@item.downloadViewModel.downloader&buyerEmail=@item.userViewModel.emailID&bookId=@item.downloadViewModel.noteID" class="dropdown-item">Yes, I Received</a></li>
                                             </ul>
                                         </div>
                                     </td>
                                 </tr>
                             }
-
-
-
                         </tbody>
+
                     </table>
                 </div>
+
             </div>
             <div class="pagination-container">
-                <ul class="pagination">
-                    <li><img src="~/Content/images/searchnote/left-arrow.png" class="prev"></li>
-                    <li class="pgno active"><a href="#">1</a></li>
-                    <li class="pgno"><a href="#">2</a></li>
-                    <li class="pgno"><a href="#">3</a></li>
-                    <li class="pgno"><a href="#">4</a></li>
-                    <li class="pgno"><a href="#">5</a></li>
-                    <li><a href="#"><img src="~/Content/images/searchnote/right-arrow.png" class="next"></a></li>
-                </ul>
+                @Html.PagedListPager(Model, pageindex => Url.Action("BuyerRequest", "user", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+                {
+                    ContainerDivClasses = null,
+                    LiElementClasses = new string[] { "pgno" },
+                    UlElementClasses = new string[] { "pagination" },
+                    LinkToPreviousPageFormat = "<",
+                    LinkToNextPageFormat = ">",
+                    MaximumPageNumbersToDisplay = 5,
+                    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never
+                })
             </div>
         </div>
     </section>

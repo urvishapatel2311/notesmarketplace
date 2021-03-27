@@ -1,0 +1,89 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "My RejectedNotes";
+}
+
+<section id="myrejectednote" class="table-page">
+    <div class="content-box-md">
+        <div class="container">
+
+            <!-- General heading -->
+            <div class="row buy">
+                <div class="col-md-5">
+                    <div class="com-heading">
+                        <h3>My Rejected Notes</h3>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <form method="post">
+                        <div class="search-box buy2 has-search">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col"></th>
+                            <th scope="col">@Html.ActionLink("Note Title", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title" })</th>
+                            <th scope="col"></th>
+                            <th scope="col">@Html.ActionLink("Category", "MyRejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                            <th scope="col"></th>
+                            <th scope="col">Remarks</th>
+                            @*<th scope="col">Clone</th>*@
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td></td>
+                                <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
+                                <td></td>
+                                <td>@item.categoryViewModel.categoryName</td>
+                                <td></td>
+                                <td>Lorem Ipsum is simply dummy text</td>
+                                @*<td>Clone</td>*@
+                                <td></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="/user/DownloadBookfromMyWindow?bookId=@item.noteViewModel.id" class="dropdown-item">Download Note</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }                            
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("MyRejectedNote", "user", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+            {
+                ContainerDivClasses = null,
+                LiElementClasses = new string[] { "pgno" },
+                UlElementClasses = new string[] { "pagination" },
+                LinkToPreviousPageFormat = "<",
+                LinkToNextPageFormat = ">",
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never
+            })
+        </div>
+    </div>
+</section>

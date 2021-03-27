@@ -86,6 +86,7 @@
     <EntitySetMapping Name="tblNoteDetails">
       <EntityTypeMapping TypeName="notesmarketplaceModel.tblNoteDetail">
         <MappingFragment StoreEntitySet="tblNoteDetails">
+          <ScalarProperty Name="isNoteDetailSet" ColumnName="isNoteDetailSet" />
           <ScalarProperty Name="filePath" ColumnName="filePath" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="sellerID" ColumnName="sellerID" />
@@ -185,6 +186,7 @@
     <EntitySetMapping Name="tblUserProfiles">
       <EntityTypeMapping TypeName="notesmarketplaceModel.tblUserProfile">
         <MappingFragment StoreEntitySet="tblUserProfile">
+          <ScalarProperty Name="isProfileSet" ColumnName="isProfileSet" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="dob" ColumnName="dob" />

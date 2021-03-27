@@ -1,13 +1,17 @@
-﻿
+﻿@model NotesMarketPlace.Models.ViewModel
+@using PagedList
+@using PagedList.Mvc
 @{
     Layout = "~/Views/Shared/_afterLoginLayout.cshtml";
+    ViewBag.Title = "Dash Board";
 }
 
-    <div>
-        <section id="dashboard" class="table-page">
-            <!--Dashbord-->
-            <div class="content-box-md">
-                <div class="container">
+<div>
+    <section id="dashboard" class="table-page">
+        <!--Dashbord-->
+        <div class="content-box-md">
+            <div class="container">
+                <form method="post">
                     <!-- General heading -->
                     <div class="row">
                         <div class="col-md-4">
@@ -17,7 +21,9 @@
                         </div>
                         <div class="col-md-8">
                             <div class="dash2">
-                                <button id="btn-head-add-note" type="submit" class="btn btn-primary btn-head-add-note">Add Note</button>
+                                <button id="btn-head-add-note" formmethod="post" type="submit" class="custombtn btn btn-primary " name="addnote" value="addbook">
+                                    <a href="@Url.Action("AddNote", "user")" class=" btn-head-add-not">Add Note</a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -36,16 +42,16 @@
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-12">
                                     <div class="row">
                                         <!-- Number of notes sell -->
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6" onclick="@("window.location.href='"+ @Url.Action("MySoldNotes","user") +"'");">
                                             <div class="dash text-center box-02">
-                                                <h4>100</h4>
+                                                <h4>@Model.mySoldNote</h4>
                                                 <p>Number Of Sold Notes</p>
                                             </div>
                                         </div>
                                         <!-- Money Earned  -->
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-6" onclick="@("window.location.href='"+ @Url.Action("MySoldNotes","user") +"'");">
                                             <div class="dash text-center box-03">
-                                                <h4>&#36;10,000</h4>
+                                                <h4>&#36;@Model.moneyEarned</h4>
                                                 <p>Money Earned</p>
                                             </div>
                                         </div>
@@ -59,23 +65,23 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                     <div>
                                         <!-- Number of notes sell -->
-                                        <div class="dash text-center dash-right box-04">
-                                            <h4>38</h4>
+                                        <div class="dash text-center dash-right box-04" onclick="@("window.location.href='"+ @Url.Action("MyDownload","user") +"'");">
+                                            <h4>@Model.myDownloads</h4>
                                             <p>My Downloads</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                     <!-- Number of notes sell -->
-                                    <div class="dash text-center dash-right box-05">
-                                        <h4>12</h4>
+                                    <div class="dash text-center dash-right box-05" onclick="@("window.location.href='"+ @Url.Action("MyRejectedNote","user") +"'");">
+                                        <h4>@Model.myRejectedNote</h4>
                                         <p>My Rejected Notes</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                     <!-- Number of notes sell -->
-                                    <div class="dash text-center dash-right box-06">
-                                        <h4>102</h4>
+                                    <div class="dash text-center dash-right box-06" onclick="@("window.location.href='"+ @Url.Action("BuyerRequest","user") +"'");">
+                                        <h4>@Model.buyerRequest</h4>
                                         <p>Buyer Requests</p>
                                     </div>
                                 </div>
@@ -91,7 +97,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="search-box buy2 has-search">
-                                <input type="search" class="form-control search-icon" id="search2" placeholder="Search">
+                                @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
                                 <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
                             </div>
                         </div>
@@ -100,74 +106,71 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Added Date</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">@Html.ActionLink("Title", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Title" })</th>
+                                        <th scope="col">@Html.ActionLink("Category", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                                        <th scope="col">@Html.ActionLink("Status", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Status" })</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Data Science</td>
-                                        <td>Science</td>
-                                        <td>Draft</td>
-                                        <td>
-                                            <img src="~/Content/images/icon-image/edit.png" class="edit-icon">
-                                            <img src="~/Content/images/icon-image/delete.png" class="delete">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Accounts</td>
-                                        <td>Commerce</td>
-                                        <td>In Review</td>
-                                        <td>
-                                            <img src="~/Content/images/icon-image/eye.png" class="eye-img">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Social Studies</td>
-                                        <td>Social</td>
-                                        <td>Submitted</td>
-                                        <td>
-                                            <img src="~/Content/images/icon-image/eye.png" class="eye-img">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>AI</td>
-                                        <td>IT</td>
-                                        <td>Draft</td>
-                                        <td>
-                                            <img src="~/Content/images/icon-image/eye.png" class="eye-img">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Data Science</td>
-                                        <td>Lorem</td>
-                                        <td>Draft</td>
-                                        <td>
-                                            <img src="~/Content/images/icon-image/edit.png" class="edit-icon">
-                                            <img src="~/Content/images/icon-image/delete.png" class="delete">
-                                        </td>
-                                    </tr>
+                                    @{
+                                        IPagedList<NotesMarketPlace.Models.ViewModel> mynotes = ViewBag.Inprogress;
+                                        foreach (NotesMarketPlace.Models.ViewModel mynote in mynotes)
+                                        {
+                                            <tr>
+                                                <td>@mynote.noteViewModel.createdDate</td>
+                                                <td>@mynote.noteViewModel.noteTitle</td>
+                                                <td>@mynote.categoryViewModel.categoryName</td>
+                                                <td>@mynote.referenceViewModel.value</td>
+                                                @if (mynote.noteViewModel.status == 3)
+                                                {
+                                                    <td>
+                                                        <a href="/user/EditNoteDetails/@mynote.noteViewModel.id"><img src="~/Content/images/icon-image/edit.png" class="edit-icon"></a>
+                                                        <a href="javascript:void(0);" onclick="confirmToDel(@mynote.noteViewModel.id);"><img src="~/Content/images/icon-image/delete.png" class="delete"></a>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td><a href="/user/NoteDetails?id=@mynote.noteViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></a></td>
+                                                }
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
+
+                            @if (ViewBag.alertDownload != null)
+                            {
+                        <script type="text/javascript">
+
+                            function confirmToDel(noteviewModelId) {
+                                    var r = confirm("@ViewBag.alertDownload");
+                                    if (r) {
+                                        callDeleMethod(noteviewModelId);
+                                    }
+                            }
+                            function callDeleMethod(noteviewModelId) {
+                                window.location.replace("/user/DeleteNote?id="+noteviewModelId);
+                            }
+                        </script>
+                            }
+
+
                         </div>
                         <!--progressNotes 01 table End-->
                         <div class="pagination-container col-md-12">
-                            <ul class="pagination">
-                                <li><img src="~/Content/images/searchnote/left-arrow.png" class="prev"></li>
-                                <li class="pgno active"><a href="#">1</a></li>
-                                <li class="pgno"><a href="#">2</a></li>
-                                <li class="pgno"><a href="#">3</a></li>
-                                <li class="pgno"><a href="#">4</a></li>
-                                <li class="pgno"><a href="#">5</a></li>
-                                <li><a href="#"><img src="~/Content/images/searchnote/right-arrow.png" class="next"></a></li>
-                            </ul>
+                            @Html.PagedListPager(mynotes, pageindex => Url.Action("SellYourNote", "user", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+                            {
+                                ContainerDivClasses = null,
+                                LiElementClasses = new string[] { "pgno" },
+                                UlElementClasses = new string[] { "pagination" },
+                                LinkToPreviousPageFormat = "<",
+                                LinkToNextPageFormat = ">",
+                                MaximumPageNumbersToDisplay = 5,
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Never
+                            })
                         </div>
                     </div>
                     <div class="row second-table">
@@ -178,7 +181,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="search-box buy2 has-search">
-                                <input type="search" class="form-control search-icon" id="search2" placeholder="Search">
+                                @Html.TextBox("searchTxt2", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
                                 <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
                             </div>
                         </div>
@@ -187,71 +190,59 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Added Date</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Sell Type</th>
-                                        <th scope="col">Price</th>
+                                        <th scope="col">@Html.ActionLink("Title", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Title" })</th>
+                                        <th scope="col">@Html.ActionLink("Category", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                                        <th scope="col">@Html.ActionLink("Sell Type", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type" })</th>
+                                        <th scope="col">@Html.ActionLink("Price", "SellYourNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" })</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Data Science</td>
-                                        <td>Science</td>
-                                        <td>Paid</td>
-                                        <td>$575</td>
-                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Account</td>
-                                        <td>Commerce</td>
-                                        <td>Free</td>
-                                        <td>$0</td>
-                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Social Studies</td>
-                                        <td>Social</td>
-                                        <td>Paid</td>
-                                        <td>$575</td>
-                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>AI</td>
-                                        <td>IT</td>
-                                        <td>Free</td>
-                                        <td>$0</td>
-                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>05-01-2021</td>
-                                        <td>Data Science</td>
-                                        <td>Science</td>
-                                        <td>Paid</td>
-                                        <td>$575</td>
-                                        <td><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
-                                    </tr>
+
+                                    @{
+                                        IPagedList<NotesMarketPlace.Models.ViewModel> publishnotes = ViewBag.Published;
+                                        foreach (NotesMarketPlace.Models.ViewModel publishnote in publishnotes)
+                                        {
+                                                <tr>
+                                                    <td>@publishnote.noteViewModel.createdDate</td>
+                                                    <td>@publishnote.noteViewModel.noteTitle</td>
+                                                    <td>@publishnote.categoryViewModel.categoryName</td>
+                                                    @if (publishnote.noteViewModel.isPaid)
+                                                    {
+                                                        <td> Paid </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td> Free </td>
+
+                                                    }
+                                                    <td>$@publishnote.noteViewModel.sellingPrice</td>
+                                                    <td><a href="/user/NoteDetails?id=@publishnote.noteViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></a></td>
+
+                                                </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="pagination-container">
-                        <ul class="pagination">
-                            <li><img src="~/Content/images/searchnote/left-arrow.png" class="prev"></li>
-                            <li class="pgno active"><a href="#">1</a></li>
-                            <li class="pgno"><a href="#">2</a></li>
-                            <li class="pgno"><a href="#">3</a></li>
-                            <li class="pgno"><a href="#">4</a></li>
-                            <li class="pgno"><a href="#">5</a></li>
-                            <li><a href="#"><img src="~/Content/images/searchnote/right-arrow.png" class="next"></a></li>
-                        </ul>
+                    <div class="pagination-container col-md-12">
+                        @Html.PagedListPager(publishnotes, pageindex2 => Url.Action("SellYourNote", "user", new { pageindex2, search = Request.QueryString["searchTxt2"] }), new PagedList.Mvc.PagedListRenderOptions
+                        {
+                            ContainerDivClasses = null,
+                            LiElementClasses = new string[] { "pgno" },
+                            UlElementClasses = new string[] { "pagination" },
+                            LinkToPreviousPageFormat = "<",
+                            LinkToNextPageFormat = ">",
+                            MaximumPageNumbersToDisplay = 5,
+                            DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                            DisplayLinkToLastPage = PagedListDisplayMode.Never
+                        })
                     </div>
-                </div>
+                </form>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 
