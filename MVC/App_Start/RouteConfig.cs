@@ -16,7 +16,7 @@ namespace NotesMarketPlace
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "user", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "user", action = "HomePage", id = UrlParameter.Optional }
             );
         }
     }
