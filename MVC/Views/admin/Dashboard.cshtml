@@ -1,17 +1,204 @@
-﻿
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Dash Board";
 }
+<section id="dashboard" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row buy">
+                <!-- General heading -->
+                <div class="col-md-12">
+                    <div class="com-heading">
+                        <h3>Dashboard</h3>
+                    </div>
+                </div>
+            </div>
+            @{
+                NotesMarketPlace.Models.notesmarketplaceEntities3 db = new NotesMarketPlace.Models.notesmarketplaceEntities3();
+                var last7day = DateTime.Now.Date.AddDays(-7);
+                int noOfInReviewNotes = db.tblNoteDetails.Where(m => m.status == 4 || m.status == 5).Count();
+                int inlast7daybookdownload = db.tblDownloads.Where(m => m.attachementDownloadDate >= last7day).Count();
+                int noOfNewRegistration = db.tblUsers.Where(m => m.createdDate >= last7day).Count();
 
-<!DOCTYPE html>
+            }
+            <!-- General heading Ends -->
+            <div class="row dashboard-info">
+                <div class="col-md-4">
+                    <div class="info-box text-center">
+                        <h4 class="dashcount"><a href="@Url.Action("NotesUnderReview","admin")">@noOfInReviewNotes</a></h4>
+                        <h6>Number of Notes in Review for Publish</h6>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box text-center">
+                        <h4><a href="@Url.Action("downloadedNote","admin")">@inlast7daybookdownload</a></h4>
+                        <h6>Number of New Notes Downloaded<br>(Last 7 Days)</h6>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box text-center">
+                        <h4><a href="@Url.Action("members","admin")">@noOfNewRegistration</a></h4>
+                        <h6>Number of Registration (Last 7 Days)</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- heading of table -->
+            <div class="row dash-row">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-12 table-head">
+                    <div class="table-heading">
+                        <h4>Published Notes</h4>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-12 ">
+                    <div class="search-box buy2  has-search dashboard-search ">
+                        @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                        <input name="sellername" hidden value="@Request.QueryString["sellername"]" />
+                        <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        <div class="form-group ddm">
+                            <form>
+                                <select class="dropdown-icon form-control" name="searchMonth" onchange="submit()">
+                                    <option value="">Select month</option>
+                                    @for (int i = 0; i < 6; i++)
+                                    {
+                                        var mmyyyy = DateTime.Now.AddMonths(-i).ToString("Y");
+                                        if (Request.QueryString["searchMonth"] != null)
+                                        {
+                                            if (Request.QueryString["searchMonth"].ToString().Equals(mmyyyy))
+                                            {
+                                                <option selected value="@mmyyyy">@mmyyyy</option>
+                                                continue;
+                                            }
+                                        }
+                                        <option value="@mmyyyy">@mmyyyy</option>
+                                    }
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- heading of table Ends -->
+            <!-- Table data -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Attachment size</th>
+                            <th scope="col">Sell Type</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Published Date</th>
+                            <th scope="col">Number of<br>Downloads</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="10" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            int noOfDownloads = 0;
+                            noOfDownloads = db.tblDownloads.Where(m => m.noteID == item.noteViewModel.id && m.isAttachmentDownloaded).Count();
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
+                                <td>@item.categoryViewModel.categoryName</td>
+                                <td>@item.noteViewModel.attachementSize kb</td>
+                                @if (item.noteViewModel.isPaid)
+                                {
+                                    <td> Paid </td>
+                                }
+                                else
+                                {
+                                    <td> Free </td>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Dashboard</title>
-</head>
-<body>
-    <div> 
+                                }
+                                <td>$@item.noteViewModel.sellingPrice</td>
+                                <td>@item.noteViewModel.tblUser1.firstName @item.noteViewModel.tblUser1.lastName</td>
+                                <td>@item.noteViewModel.publishedDate</td>
+                                <td><a href="/admin/downloadedNote?bookid=@item.noteViewModel.id">@noOfDownloads</a></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="/user/DownloadBookfromMyWindow?bookId=@item.noteViewModel.id">Download Notes</a></li>
+                                            <li><a class="dropdown-item" href="/admin/NoteDetails?id=@item.noteViewModel.id">View More Details</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);" onclick="onUnpublish(@item.noteViewModel.id, '@item.noteViewModel.noteTitle','@item.userViewModel.emailID')">Unpublish</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <script>
+                    function onUnpublish(id, title, email) {
+                        document.getElementById("UnpublishForId").value = id;
+                        document.getElementById("sellerEmailID").value = email;
+                        document.getElementById("noteDetails").innerHTML = title;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                </script>
+                <!-- modal for Unpublish note -->
+                <div class="modal fade feedbackDetails" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+
+                        @using (Html.BeginForm("Dashboard", "admin", FormMethod.Post, new { }))
+                        {
+
+                            <div class="modal-content review-modal inappropriate-modal">
+                                <div class="modal-body">
+                                    <div class="popup-head text-center">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            Are you sure you want to Unpublish this note?
+                                        </h5>
+                                    </div>
+                                    <div class="reportin general-heading" id="exampleModalLabel">
+                                        <h3 id="noteDetails"></h3>
+                                    </div>
+                                    <input type="hidden" name="UnpublishForId" id="UnpublishForId" />
+                                    <input type="hidden" name="sellerEmail" id="sellerEmailID" />
+                                    <div class="form-group">
+                                        @Html.Label("remarks", "Remarks")
+                                        <textarea type="text" rows="3" class="form-control" placeholder="Write Remarks" name="adminComment" required></textarea>
+                                    </div>
+                                    <button type="submit" id="popup-btn" class="btn-reject btn btn-note-reject" value="unpublish" name="command">Unpublish</button>
+                                    <button type="button" id="btnCancel" class="btn-in-cancel btn " data-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- End of modal for Unpublish note -->
+            </div>
+            <!-- Table data Ends -->
+        </div>
+        <!-- Pagination -->
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("Dashboard", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+           {
+               ContainerDivClasses = null,
+               LiElementClasses = new string[] { "pgno" },
+               UlElementClasses = new string[] { "pagination" },
+               LinkToPreviousPageFormat = "<",
+               LinkToNextPageFormat = ">",
+               MaximumPageNumbersToDisplay = 5,
+               DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never
+           })
+        </div>
+        <!-- Pagination Ends -->
     </div>
-</body>
-</html>
+</section>

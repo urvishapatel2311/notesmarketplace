@@ -1,0 +1,230 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Notes Under Review";
+}
+
+<!-- Notes Under Review -->
+<section id="notesunderreview" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <!-- General heading -->
+            <div class="row buy">
+                <div class="col-md-12 col-sm-12">
+                    <div class="com-heading">
+                        <h3>Notes Under Review</h3>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 rejlabl">
+                    <label>Seller</label>
+                </div>
+                @{
+                    NotesMarketPlace.Models.notesmarketplaceEntities3 db = new NotesMarketPlace.Models.notesmarketplaceEntities3();
+                }
+                <div class="col-md-2 col-sm-2 col-12">
+                    <select class="dropdown-icon form-control" id="ddg" name="sellername" onchange="location.href=this.value">
+                        @{
+                            <option value="@Url.Action("NotesUnderReview","admin", new { sellername=""})" disabled selected>Select Seller</option>
+                            List<String> sellernames = db.tblUsers.Select(m => m.firstName).Distinct().ToList();
+                        }
+                        @foreach (String sellername in sellernames)
+                        {
+                            if (sellername != null)
+                            {
+                                if (sellername.Equals(Request.QueryString["sellername"]))
+                                {
+                                    <option selected value="@Url.Action("NotesUnderReview","admin", new { sellername=sellername.ToString()})">@sellername</option>
+                                    continue;
+                                }
+                            }
+                            <option value="@Url.Action("NotesUnderReview","admin", new { sellername=sellername.ToString()})">@sellername</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="col-md-10 col-sm-10 col-12">
+                    <form method="post">
+                        <div class="search-box buy2  has-search">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                            <input name="sellername" hidden value="@Request.QueryString["sellername"]" />
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @ViewBag.record
+            <div class="table-responsive-xl">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">@Html.ActionLink("Note Title", "NotesUnderReview", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title" })</th>
+                            <th scope="col">@Html.ActionLink("Category", "NotesUnderReview", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                            <th scope="col">@Html.ActionLink("Seller", "NotesUnderReview", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Seller" })</th>
+                            <th scope="col"></th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                            <th scope="col">Action</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="12" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
+                                <td>@item.categoryViewModel.categoryName</td>
+                                <td>@item.userViewModel.firstName @item.userViewModel.lastName</td>
+                                <td><a href="/admin/memberDetails?id=@item.userViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></a></td>
+                                <td>@item.noteViewModel.createdDate</td>
+                                <td>@item.referenceViewModel.value</td>
+                                <td>
+                                    <button id="btn-approve" type="button" class="btn-note-approve" onclick="onApprove(@item.noteViewModel.id)">Approve</button>
+                                </td>
+                                <td>
+                                    <button id="btn-reject" type="button" class="btn-note-reject" onclick="onReject(@item.noteViewModel.id, '@item.noteViewModel.noteTitle', '@item.categoryViewModel.categoryName')">Reject</button>
+                                </td>
+                                <td>
+                                    @if (item.noteViewModel.status == 5)
+                                    {
+                                        <button id="btn-inreview" type="button" class="btn-note-inreview" onclick="onReview(@item.noteViewModel.id)" disabled>InReview</button>
+                                    }
+                                    else
+                                    {
+                                        <button id="btn-inreview" type="button" class="btn-note-inreview" onclick="onReview(@item.noteViewModel.id)">InReview</button>
+                                    }
+
+                                </td>
+
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="/admin/NoteDetails?id=@item.noteViewModel.id">View More Details</a></li>
+                                            <li><a class="dropdown-item" href="/user/DownloadBookfromMyWindow?bookId=@item.noteViewModel.id">Download Notes</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <script>
+                    function onApprove(id) {
+                        document.getElementById("ApproveForId").value = id;
+                        $('#exampleModalLong').modal('show');
+                    }
+                    function onReject(id, title, cat) {
+                        document.getElementById("RejectForId").value = id;
+                        document.getElementById("noteDetails").innerHTML = title + " - " + cat;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                    function onReview(id) {
+                        document.getElementById("ReviewForId").value = id;
+                        $('#exampleModalLong3').modal('show');
+                    }
+                </script>
+
+                <!-- modal for Approve note -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form method="post">
+                            <div class="review-modal modal-content ">
+                                <div class="popup-head">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Are you sure want to Approve this note?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="ApproveForId" id="ApproveForId" />
+                                    <p class="d-flex" style="color:black">"Via marking the note In Review – System will let user know that review process has been initiated. Please press yes to continue."</p>
+                                    <button class=" btn-note-approve btn-yes " type="submit" value="approve" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of modal for Approve note -->
+                <!-- modal for Reject note -->
+                <div class="modal fade feedbackDetails" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+
+                        @using (Html.BeginForm("NotesUnderReview", "admin", FormMethod.Post, new { }))
+                        {
+
+                            <div class="modal-content review-modal ">
+                                <div class="modal-body">
+                                    <div class="popup-head ">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            Are you sure you want to reject seller request?
+                                        </h5>
+                                    </div>
+                                    <div class="reportin general-heading" id="exampleModalLabel">
+                                        <h3 id="noteDetails"></h3>
+                                    </div>
+                                    <input type="hidden" name="ApproveForId" id="RejectForId" />
+                                    <div class="form-group">
+                                        @Html.Label("remarks", "Remarks")
+                                        <textarea type="text" rows="3" class="form-control" placeholder="Write Remarks" name="adminComment" required></textarea>
+                                    </div>
+                                    <button type="submit" id="popup-reject-btn" class="btn-note-reject" value="reject" name="command">Reject</button>
+                                    <button type="button" id="btnCancel" class="btn-in-cancel btn " data-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>}
+                    </div>
+                </div>
+                <!-- End of modal for Reject note -->
+                <!-- modal for In Review note -->
+                <div class="modal fade" id="exampleModalLong3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form method="post">
+                            <div class="modal-content  review-modal">
+                                <div class="popup-head ">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Are you sure want to go for In Review this note?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="ApproveForId" id="ReviewForId" />
+                                    <p class="d-flex" style="color:black">"Via marking the note In Review – System will let user know that review process has been initiated. Please press yes to continue."</p>
+                                    <button class="btn-note-approve btn-yes" type="submit" value="inreview" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of modal for In Review note -->
+            </div>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("NotesUnderReview", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+            {
+                ContainerDivClasses = null,
+                LiElementClasses = new string[] { "pgno" },
+                UlElementClasses = new string[] { "pagination" },
+                LinkToPreviousPageFormat = "<",
+                LinkToNextPageFormat = ">",
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never
+            })
+        </div>
+    </div>
+</section>

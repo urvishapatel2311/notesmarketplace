@@ -143,65 +143,67 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePassViewModel.cs" />
-    <Compile Include="Models\noteMarket.Context.cs">
+    <Compile Include="Models\notesmarketplace.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>noteMarket.Context.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\noteMarket.cs">
+    <Compile Include="Models\notesmarketplace.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\noteMarket.Designer.cs">
+    <Compile Include="Models\notesmarketplace.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>noteMarket.edmx</DependentUpon>
+      <DependentUpon>notesmarketplace.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblDownload.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblManageCountry.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblManageNoteCategory.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblManageNoteType.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblNoteAttachement.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblNoteDetail.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblNoteReportedIsuue.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblNoteReview.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblReferenceData.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblSystemConfig.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUser.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUserProfile.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUserRole.cs">
-      <DependentUpon>noteMarket.tt</DependentUpon>
+      <DependentUpon>notesmarketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UNC_ViewModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\adminCss\responsive.css" />
+    <Content Include="Content\adminCss\style.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -285,22 +287,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Image\Default.png" />
-    <Content Include="Image\DefaultBookImage.png" />
-    <Content Include="Image\DefaultUserIcon.png" />
+    <Content Include="Image\DefaultBook.png" />
+    <Content Include="Image\DefaultProfile.png" />
+    <Content Include="Image\DefaultProfileImg.png" />
+    <Content Include="Image\Default_user_img.png" />
     <Content Include="Image\notePhoto\search1u94&amp;b%24bMq4%24X%24Y1cNO8G3F2.png" />
     <Content Include="Image\notePhoto\search2%40OqbUb4D&amp;d5M7l.png" />
     <Content Include="Image\notePhoto\search2BCFQBAJeV.png" />
     <Content Include="Image\notePhoto\search3q&amp;&amp;CG8L!cuXg6L.png" />
-    <Content Include="Models\noteMarket.Context.tt">
+    <Content Include="Models\notesmarketplace.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>noteMarket.Context.cs</LastGenOutput>
-      <DependentUpon>noteMarket.edmx</DependentUpon>
+      <DependentUpon>notesmarketplace.edmx</DependentUpon>
+      <LastGenOutput>notesmarketplace.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\noteMarket.tt">
+    <Content Include="Models\notesmarketplace.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>noteMarket.edmx</DependentUpon>
-      <LastGenOutput>noteMarket.cs</LastGenOutput>
+      <DependentUpon>notesmarketplace.edmx</DependentUpon>
+      <LastGenOutput>notesmarketplace.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -312,12 +315,12 @@
     <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\css\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Content\images\User-Profile\Thumbs.db" />
-    <EntityDeploy Include="Models\noteMarket.edmx">
+    <EntityDeploy Include="Models\notesmarketplace.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>noteMarket.Designer.cs</LastGenOutput>
+      <LastGenOutput>notesmarketplace.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\noteMarket.edmx.diagram">
-      <DependentUpon>noteMarket.edmx</DependentUpon>
+    <Content Include="Models\notesmarketplace.edmx.diagram">
+      <DependentUpon>notesmarketplace.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -372,10 +375,30 @@
     <Content Include="Views\user\MyRejectedNote.cshtml" />
     <Content Include="Views\Shared\_HomePageLayout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_AdminAfterLoginLayout.cshtml" />
+    <Content Include="Views\admin\NotesUnderReview.cshtml" />
+    <Content Include="Views\admin\publishedNote.cshtml" />
+    <Content Include="Views\admin\rejectedNote.cshtml" />
+    <Content Include="Views\admin\members.cshtml" />
+    <Content Include="Views\admin\memberDetails.cshtml" />
+    <Content Include="Views\admin\manageAdministrator.cshtml" />
+    <Content Include="Views\admin\addAdmin.cshtml" />
+    <Content Include="Views\admin\downloadedNote.cshtml" />
+    <Content Include="Views\admin\addCategory.cshtml" />
+    <Content Include="Views\admin\addCountry.cshtml" />
+    <Content Include="Views\admin\addType.cshtml" />
+    <Content Include="Views\admin\manageCategory.cshtml" />
+    <Content Include="Views\admin\manageSystemConfiguration.cshtml" />
+    <Content Include="Views\admin\manageType.cshtml" />
+    <Content Include="Views\admin\manageCountry.cshtml" />
+    <Content Include="Views\admin\spamReport.cshtml" />
+    <Content Include="Views\admin\myProfile.cshtml" />
+    <Content Include="Views\admin\NoteDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\fonts\" />
+    <Folder Include="Image\adminDefaultData\" />
     <Folder Include="Image\notePdf\" />
     <Folder Include="Image\notePreview\" />
     <Folder Include="Image\profilePicture\" />

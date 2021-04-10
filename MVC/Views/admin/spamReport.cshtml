@@ -1,0 +1,130 @@
+﻿@model IPagedList<NotesMarketPlace.Models.tblNoteReportedIsuue>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Spam Reports";
+}
+
+<!-- Spam Reports -->
+<section id="spamreports" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row buy">
+
+                <!-- General heading -->
+                <div class="col-md-4">
+                    <div class="com-heading">
+                        <h3>Spam Reports</h3>
+                    </div>
+                </div>
+                <!-- General heading Ends -->
+
+                <div class="col-md-8">
+                    <form method="post">
+                        <div class="search-box buy2  has-search">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Table data -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">Reported By</th>
+                            <th scope="col">Note Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Date Edited</th>
+                            <th scope="col">Remark</th>
+                            <th scope="col">Action</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="8" class="align-middle"> Records not found </td></tr>
+                        }
+                        @*@foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)*@
+                        @foreach (NotesMarketPlace.Models.tblNoteReportedIsuue item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td>@item.tblUser.firstName @item.tblUser.lastName</td>
+                                <td><a href="/user/NoteDetails?id=@item.tblNoteDetail.id">@item.tblNoteDetail.noteTitle</a></td>
+                                <td>@item.tblNoteDetail.tblManageNoteCategory.categoryName</td>
+                                <td>@item.createdDate</td>
+                                <td>@item.remarks</td>
+                                <td><a href="javascript:void(0);" onclick="deleteReportedIssue(@item.id);"><img src="~/Content/images/icon-image/delete.png"></a></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="/user/DownloadBookfromMyWindow?bookId=@item.tblNoteDetail.id">Download Notes</a></li>
+                                            <li><a class="dropdown-item" href="/admin/NoteDetails?id=@item.tblNoteDetail.id">View More Details</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <script>
+                    function deleteReportedIssue(id) {
+                        document.getElementById("DeleteForId").value = id;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                </script>
+
+                <!-- modal for InActive Category -->
+                <form method="post">
+                    <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+
+                            <div class="review-modal  modal-content ">
+                                <div class="popup-head text-center">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        “Are you sure you want to delete reported issue?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="DeleteForId" id="DeleteForId" />
+                                    <button class="btn-note-reject btn-yes" type="submit" value="delete" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <!-- End of modal for InActive Category -->
+            </div>
+            <!-- Table data Ends -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("spamReport", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+           {
+               ContainerDivClasses = null,
+               LiElementClasses = new string[] { "pgno" },
+               UlElementClasses = new string[] { "pagination" },
+               LinkToPreviousPageFormat = "<",
+               LinkToNextPageFormat = ">",
+               MaximumPageNumbersToDisplay = 5,
+               DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never
+           })
+        </div>
+        <!-- Pagination Ends -->
+
+    </div>
+</section>

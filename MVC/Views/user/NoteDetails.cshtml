@@ -26,7 +26,14 @@
                                 <div class="col-md-5 col-xs-12 col-12">
                                     <!--Notesdetail left-->
                                     <div class="note-content-01">
-                                        <img src="@Url.Content(Model.noteDetailsViewModel.notePicture)" alt="Images" class="img-fluid" />
+                                        @if (Model.noteDetailsViewModel.notePicture != null)
+                                        {
+                                            <img style="min-height:300px; max-width:276px;" src="@Url.Content(Model.noteDetailsViewModel.notePicture)" alt="Images" class="img-responsive search-image img-fluid" />
+                                        }
+                                        else
+                                        {
+                                            <img style="min-height:300px; max-width:276px;" src="~/Image/DefaultBook.png" alt="Images" class="img-responsive search-image" />
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-xs-12 col-12">
@@ -40,33 +47,34 @@
                                         </div>
                                         @if (Model.noteDetailsViewModel.isPaid == false)
                                         {
-                                            <button id="btn-modal" class="custombtn normal-btn btn btn-primary btn-modal " formmethod="post" type="submit">
-                                                <a href="/user/DownloadBook?sellerEmail=@Model.userViewModel&bookId=@Model.noteDetailsViewModel.id">Download</a>
+                                            <button id="btn-modal"  class="custombtn normal-btn btn btn-primary btn-modal " formmethod="post" type="submit">
+                                                <a href="/user/DownloadBook?sellerEmail=@Model.userViewModel&bookId=@Model.noteDetailsViewModel.id" >Download</a>
                                             </button>
                                         }
                                         else
                                         {
-                                        <button id="btn-modal" type="button" onclick="confirmToBuy();" class="custombtn  normal-btn btn btn-primary btn-modal">
-                                            <a href="#">Download /<span class="dollar"> &#36;</span>@Model.noteDetailsViewModel.sellingPrice</a>
-                                        </button>
+                                            <!-- Button trigger modal -->
+                                            <button id="btn-modal" type="button" onclick="confirmToBuy();" class="custombtn  normal-btn btn btn-primary btn-modal">
+                                                <a >Download /<span class="dollar"> &#36;</span>@Model.noteDetailsViewModel.sellingPrice</a>
+                                            </button>
                                         }
-                                            <script type="text/javascript">
-                                                function confirmToBuy() {
-                                                    var r = confirm("Are you sure you want to download this Paid note.");
-                                                    if (r) {
-                                                        $('#exampleModalLong').modal('show');
-                                                        $('#exampleModalLong').on('hidden.bs.modal', function () {
-                                                            // do something…
-                                                            closeModel()
-                                                            //document.getElementById("myform").submit();
-                                                        });    
-                                                    }
-                                                }
-                                                function closeModel() {
-                                                    window.location.replace("/user/DownloadBook?sellerEmail=@Model.userViewModel&bookId=@Model.noteDetailsViewModel.id");
+                                        <script type="text/javascript">
+                                            function confirmToBuy() {
+                                                var r = confirm("Are you sure you want to download this Paid note.");
+                                                if (r) {
+                                                    $('#exampleModalLong').modal('show');
+                                                    $('#exampleModalLong').on('hidden.bs.modal', function () {
+                                                        // do something…
+                                                        closeModel()
+                                                    });
 
-                                                   }
-                                            </script>
+                                                }
+                                            }
+                                            function closeModel() {
+                                                window.location.replace("/user/DownloadBook?sellerEmail=@Model.userViewModel&bookId=@Model.noteDetailsViewModel.id");
+
+                                            }
+                                        </script>
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -117,10 +125,6 @@
                                 <div class="col-md-5 col-xs-5 col-5"><span>Country:</span></div>
                                 <div class="col-md-7 col-xs-7 col-7">
                                     <span>
-                                        @if (string.IsNullOrEmpty(Model.noteDetailsViewModel.noteUniversity))
-                                        {
-                                            <h6>&nbsp; - &nbsp;</h6>
-                                        }
                                         <h6>@Model.contryViewModel</h6>
                                     </span>
                                 </div>
@@ -244,59 +248,48 @@
 
                                     @foreach (NotesMarketPlace.Models.SingleReview myreview in Model.reviewViewModelList)
                                     {
-                                        <div id="review-01">
-                                            <div class="row review-cust">
-                                                <div class="col-md-1 text-center">
-                                                    @{
-                                                        string profileUrl = myreview.profileUrl.Split('~')[1];
-                                                    }
-                                                    <img style="width: 50px;" src="@profileUrl">
+                                    <div id="review-01">
+                                        <div class="row review-cust">
+                                            <div class="col-md-1 text-center">
+                                                @{
+                                                    string profileUrl = myreview.profileUrl.Split('~')[1];
+                                                }
+                                                <img style="width: 50px;" src="@profileUrl">
+                                            </div>
+                                            <div class="col-md-11  custmer-inner">
+                                                <div class="per-name">
+                                                    <h5>@myreview.userName</h5>
                                                 </div>
-                                                <div class="col-md-11  custmer-inner">
-                                                    <div class="per-name">
-                                                        <h5>@myreview.userName</h5>
+                                                <div class="show-rating">
+                                                    <div class="rate ">
+
+
+                                                        @for (double i = 0; i < (5 - (int) myreview.singlereviewViewModel.rating); i++)
+                                                        {
+                                                            <label></label>
+                                                        }
+                                                        @for (double i = 0; i < (int)myreview.singlereviewViewModel.rating; i++)
+                                                        {
+                                                            <label class="dorate"></label>
+                                                        }
                                                     </div>
-                                                    <div class="show-rating">
-                                                        <div class="rate ">
+                                                </div>
 
-
-                                                            @for (double i = 0; i < (5 - (int)myreview.singlereviewViewModel.rating); i++)
-                                                            {
-                                                                <label></label>
-                                                            }
-                                                            @for (double i = 0; i < (int)myreview.singlereviewViewModel.rating; i++)
-                                                            {
-                                                                <label class="dorate"></label>
-                                                            }
-
-                                                            @*<input type="radio" id="star5" name="rate" value="5" />
-                                                                <label for="star5" title="text">5 stars</label>
-                                                                <input type="radio" id="star4" name="rate" value="4" />
-                                                                <label for="star4" title="text">4 stars</label>
-                                                                <input type="radio" id="star3" name="rate" value="3" />
-                                                                <label for="star3" title="text">3 stars</label>
-                                                                <input type="radio" id="star2" name="rate" value="2" />
-                                                                <label for="star2" title="text">2 stars</label>
-                                                                <input type="radio" id="star1" name="rate" value="1" />
-                                                                <label for="star1" title="text">1 star</label>*@
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="rew-p">
-                                                        <p>@myreview.singlereviewViewModel.comments</p>
-                                                    </div>
+                                                <div class="rew-p">
+                                                    <p>@myreview.singlereviewViewModel.comments</p>
                                                 </div>
                                             </div>
-
                                         </div>
+
+                                    </div>
                                     }
 
-
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 </div>

@@ -3,7 +3,6 @@
 ===================================================*/
 html,
 body {
-    height: 100%;
 }
 
 body {
@@ -50,9 +49,9 @@ section {
 }
 
 
-#bg-full .container {
-    padding: 8%;
-}
+    #bg-full .container {
+        padding: 8%;
+    }
 
 #bg-half {
     background-image: url("../images/title-image/banner-with-overlay.jpg");
@@ -74,6 +73,9 @@ section {
     background-size: cover;
 }
 
+.fixheight {
+    min-height: calc(100vh - 226px);
+}
 /* ================================================
                     Dashboard
 ===================================================*/
@@ -115,7 +117,6 @@ section {
 
 .earning {
     border: 1px solid #d1d1d1;
-
 }
 
 .box-02,
@@ -205,9 +206,9 @@ section {
     color: #333333;
 }
 
-#about-right p:first-child {
-    margin-bottom: 50px;
-}
+    #about-right p:first-child {
+        margin-bottom: 50px;
+    }
 
 /*---------work section-------*/
 
@@ -232,36 +233,34 @@ section {
     margin: 0;
 }
 
-.about .work-content-img img {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    padding: 40px;
-    margin: 0;
-}
+    .about .work-content-img img {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        padding: 40px;
+        margin: 0;
+    }
 
 .work-content {
     padding: 30px;
 }
 
-.work-content h4 {
-    margin-bottom: 20px;
-}
+    .work-content h4 {
+        margin-bottom: 20px;
+    }
 
-.work-content p {
-    font-size: 18px;
-    font-weight: 400;
-    margin: 0;
-}
+    .work-content p {
+        font-size: 18px;
+        font-weight: 400;
+        margin: 0;
+    }
 
 #btn-down {
     width: 172px;
-
 }
 
 #btn-sell {
     width: 150px;
-
 }
 
 /*-----Customer section-----*/
@@ -280,7 +279,6 @@ section {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -291,24 +289,21 @@ section {
     padding: 20px;
 }
 
-.author-name-des > h6 {
-
-    margin-top: 7px;
-}
-
+    .author-name-des > h6 {
+        margin-top: 7px;
+    }
 
 
 
-.author-name-des h4 {
-    /* margin-bottom: 15px;*/
-    line-height: 36px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 0;
 
-
-}
+    .author-name-des h4 {
+        /* margin-bottom: 15px;*/
+        line-height: 36px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin: 0;
+    }
 
 .customer-up-box {
     margin: 60px 0 30px 0;
@@ -361,7 +356,6 @@ section {
     color: #333333;
     padding-bottom: 0;
     margin-bottom: 10px;
-
 }
 
 .form-control {
@@ -393,9 +387,9 @@ section {
     margin-bottom: 10px;
 }
 
-.fp:hover {
-    text-decoration: none;
-}
+    .fp:hover {
+        text-decoration: none;
+    }
 
 
 /*form {
@@ -406,11 +400,9 @@ section {
     margin-bottom: 30px;
 }
 
-#check input {
-
-    border: 1px solid #d1d1d1;
-
-}
+    #check input {
+        border: 1px solid #d1d1d1;
+    }
 
 #check_box {
     width: 30px;
@@ -441,30 +433,35 @@ button.btn {
     height: 45px;
     text-transform: uppercase;
 }
+button.btn>a{
+    color:#fff;
+    text-decoration:none;
+}
+
+    button.btn:hover {
+        color: #fff;
+    }
 
 .link-for-registration {
     padding: 0;
     margin: 0;
 }
 
-.link-for-registration p {
-    color: #333333;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-top: 20px;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
+    .link-for-registration p {
+        color: #333333;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 20px;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
 
-.link-for-registration a {
-    color: #6255a5;
-    text-decoration: none;
-}
-/*
-#login_status {
-    display: none;
-}
+    .link-for-registration a {
+        color: #6255a5;
+        text-decoration: none;
+    }
+
 /*-----Sign up-----*/
 #register_status {
     display: none;
@@ -498,7 +495,6 @@ button.btn {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-
 }
 
 #logo {
@@ -548,6 +544,7 @@ button.btn {
     color: black;
     text-decoration: none;
 }
+
 .container {
     max-width: 1470px;
 }
@@ -578,12 +575,10 @@ button.btn {
 }
 
 .filter-heading h6 {
-
     color: #333333;
     font-weight: 400;
     font-size: 18px;
     line-height: 26px;
-
     padding: 0;
 }
 
@@ -607,7 +602,6 @@ button.btn {
 .note-content-01 img {
     position: relative;
     height: 300px;
-
 }
 
 .note-head h3 {
@@ -640,11 +634,11 @@ button.btn {
     font-weight: 400;
 }
 
-.notes-info span,
-.notes-info span > h6 {
-    line-height: 36px;
-    font-size: 18px;
-}
+    .notes-info span,
+    .notes-info span > h6 {
+        line-height: 36px;
+        font-size: 18px;
+    }
 
 .notes-info .mark-in span {
     font-size: 14px;
@@ -660,37 +654,37 @@ button.btn {
     display: flex;
 }
 
-.notes-info > div:nth-last-child(2) > div.show-rating label {
-    font-size: 16px;
-    font-weight: 400;
-    list-style: none;
-    line-height: 20px;
-}
+    .notes-info > div:nth-last-child(2) > div.show-rating label {
+        font-size: 16px;
+        font-weight: 400;
+        list-style: none;
+        line-height: 20px;
+    }
 
-.notes-info > div:nth-last-child(2) > div.show-rating .rate {
-    float: right;
-    padding: 0;
-    display: inline-block, flex;
-}
+    .notes-info > div:nth-last-child(2) > div.show-rating .rate {
+        float: right;
+        padding: 0;
+        display: inline-block, flex;
+    }
 
-.notes-info > div:nth-last-child(2) > div.show-rating .rate:not(:checked) > input {
-    position: absolute;
-    top: -9999px;
-}
+        .notes-info > div:nth-last-child(2) > div.show-rating .rate:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+        }
 
-.notes-info > div:nth-last-child(2) > div.show-rating .rate:not(:checked) > label {
-    float: right;
-    width: 0.9em;
-    overflow: hidden;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 30px;
-    color: #ccc;
-}
+        .notes-info > div:nth-last-child(2) > div.show-rating .rate:not(:checked) > label {
+            float: right;
+            width: 0.9em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
 
-.notes-info > div:nth-last-child(2) > div.show-rating .rate {
-    float: right;
-}
+    .notes-info > div:nth-last-child(2) > div.show-rating .rate {
+        float: right;
+    }
 
 .rate:not(:checked) > label:before {
     content: '★';
@@ -716,7 +710,6 @@ button.btn {
 
 #note-bottom {
     height: 300px;
-
 }
 
 /*
@@ -740,11 +733,10 @@ button.btn {
 .customer-review {
     border: 1px solid #d1d1d1;
     padding: 30px;
-    height:475px;
+    height: 475px;
 }
 
 .review-cust {
-
     margin: 0 0 30px 0;
 }
 
@@ -769,19 +761,18 @@ button.btn {
     overflow: hidden;
 }
 
-.responsive-wrapper img,
-.responsive-wrapper object,
-.responsive-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 480px;
-
-    border: 1px solid #d1d1d1;
-    padding: 0;
-    margin: 0;
-}
+    .responsive-wrapper img,
+    .responsive-wrapper object,
+    .responsive-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 480px;
+        border: 1px solid #d1d1d1;
+        padding: 0;
+        margin: 0;
+    }
 
 /*css particular to this iframe*/
 
@@ -805,14 +796,13 @@ ul.note-details {
     padding-top: 40px;
 }
 
-.popup-head img {
-    height: 63px;
-    width: 63px;
-}
+    .popup-head img {
+        height: 63px;
+        width: 63px;
+    }
 
 .modal {
     margin-top: 150px;
-
     padding: 0;
 }
 
@@ -836,20 +826,21 @@ ul.note-details {
     margin-bottom: 30px;
 }
 
-.popup-content p {
-    font-size: 16px;
-    margin-bottom: 30px;
-}
+    .popup-content p {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
 
 
 button.custombtn > a {
     text-decoration: none;
     color: white;
 }
+
 button.custombtn :hover {
     background-color: none;
 }
-    /* ================================================
+/* ================================================
                     search note
 ===================================================*/
 #search {
@@ -914,41 +905,40 @@ button.custombtn :hover {
     min-height: 51px;
 }
 
-.book-title h6 {
-    font-size: 20px;
-    line-height: 26px;
-    color: #6255a5;
-    font-weight: 600;
-}
+    .book-title h6 {
+        font-size: 20px;
+        line-height: 26px;
+        color: #6255a5;
+        font-weight: 600;
+    }
 
 .info-list {
     margin: 30px 0 20px 0;
 }
 
-.info-list ul li img {
-    text-align: center;
-    width: 30px;
-    height: 20px;
-    margin-right: 15px;
-}
+    .info-list ul li img {
+        text-align: center;
+        width: 30px;
+        height: 20px;
+        margin-right: 15px;
+    }
 
-.info-list ul li span {
+    .info-list ul li span {
+        color: #333333;
+    }
 
-    color: #333333;
-}
+    .info-list ul li span,
+    .show-rating label {
+        font-size: 16px;
+        font-weight: 400;
+        list-style: none;
+        line-height: 20px;
+    }
 
-.info-list ul li span,
-.show-rating label {
-    font-size: 16px;
-    font-weight: 400;
-    list-style: none;
-    line-height: 20px;
-}
-
-.info-list ul li {
-    list-style: none;
-    padding-bottom: 15px;
-}
+    .info-list ul li {
+        list-style: none;
+        padding-bottom: 15px;
+    }
 
 ul.info-list-ul {
     padding: 0;
@@ -976,46 +966,46 @@ ul li.l-list span {
     display: inline-block, flex;
 }
 
-.rate label {
-    margin-bottom: 0;
-}
+    .rate label {
+        margin-bottom: 0;
+    }
 
-.rate:not(:checked) > input {
-    position: absolute;
-    top: -9999px;
-}
+    .rate:not(:checked) > input {
+        position: absolute;
+        top: -9999px;
+    }
 
-.rate:not(:checked) > label {
-    float: right;
-    width: 1em;
-    height: 30px;
-    overflow: hidden;
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: 30px;
-    color: #ccc;
-}
+    .rate:not(:checked) > label {
+        float: right;
+        width: 1em;
+        height: 30px;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
+    }
 
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
 
-.rate > input:checked ~ label {
-    color: #ffc700;
-}
+    .rate > input:checked ~ label {
+        color: #ffc700;
+    }
 
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;
-}
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;
+    }
 
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
 
 .count-review {
     padding-left: 6px;
@@ -1025,7 +1015,6 @@ ul li.l-list span {
                 user profile
 ===================================================*/
 .dropdown-icon {
-
     background: url(../images/User-Profile/down-arrow.png)no-repeat;
     background-position: right 10px center;
     background-size: 15px;
@@ -1086,17 +1075,16 @@ select {
     height: 110px;
     margin: 0;
     position: relative;
-
 }
 
-.upload label > img {
-    margin-top: 16px;
-}
+    .upload label > img {
+        margin-top: 16px;
+    }
 
-.upload label > p {
-    margin: 0;
-    color: #d1d1d1;
-}
+    .upload label > p {
+        margin: 0;
+        color: #d1d1d1;
+    }
 
 input[type='file'] {
     position: absolute;
@@ -1134,41 +1122,41 @@ input[type='file'] {
     margin: 0;
 }
 
-.footer-item p {
-    margin-top: 5px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
+    .footer-item p {
+        margin-top: 5px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
 
 ul.footer-social-list {
     margin: 0;
 }
 
-ul.footer-social-list li {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
+    ul.footer-social-list li {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
 
-ul.footer-social-list li a {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    background-color: #6255a5;
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    line-height: 35px;
-    color: #fff;
-    border-radius: 50%;
-}
+        ul.footer-social-list li a {
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            background-color: #6255a5;
+            width: 36px;
+            height: 36px;
+            display: inline-block;
+            line-height: 35px;
+            color: #fff;
+            border-radius: 50%;
+        }
 
 /* ================================================
                 Contact Us
@@ -1314,7 +1302,7 @@ tbody tr td {
     vertical-align: middle;
 }
 
-#buyerrequest table tbody tr > td:nth-last-child(9)>a {
+#buyerrequest table tbody tr > td:nth-last-child(9) > a {
     color: #6255a5;
 }
 
@@ -1324,20 +1312,23 @@ tbody tr td {
 /*Rating star*/
 .rating {
     border: none;
-    
-    }
-fieldset{
-    display:inline-block;
 }
-.add-review .modal-head{
-    margin-bottom:20px;
+
+fieldset {
+    display: inline-block;
 }
+
+.add-review .modal-head {
+    margin-bottom: 20px;
+}
+
 .dorate {
     color: #ffc107 !important;
 }
+
 .rating > input {
     display: none;
-    float:left;
+    float: left;
 }
 
 
@@ -1349,52 +1340,55 @@ fieldset{
     content: "\f005";
 }
 
-   
 
-    .rating > label {
-        color: #ddd;
-        float:right;
-        font-size: 30px;
-    }
 
-    /***** CSS Magic to Highlight Stars on Hover *****/
-    .rating > input:checked ~ label, /* show gold star when clicked */
-    .rating:not(:checked) > label:hover, /* hover current star */
-    .rating:not(:checked) > label:hover ~ label {
-        color: #FFD700;
-    }
-
-        /* hover previous stars in list */
-        rating > input:checked + label:hover, /* hover current star when changing rating */
-        .rating > input:checked ~ label:hover,
-        .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-        .rating > input:checked ~ label:hover ~ label {
-            color: #FFED85;
-        }
-.btn-review{
-    font-size:14px;
-    line-height:20px;
-    margin-top:10px;
+.rating > label {
+    color: #ddd;
+    float: right;
+    font-size: 30px;
 }
-.add-review  .form-group{
-    margin-bottom:0;
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label {
+    color: #FFD700;
+}
+
+    /* hover previous stars in list */
+    rating > input:checked + label:hover, /* hover current star when changing rating */
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+    .rating > input:checked ~ label:hover ~ label {
+        color: #FFED85;
+    }
+
+.btn-review {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.add-review .form-group {
+    margin-bottom: 0;
 }
 
 
 #mydownload table tbody tr > td:nth-last-child(9) > a {
     color: #6255a5;
 }
+
 .inappropriate-modal {
     width: 600px;
 }
 
-.inappropriate-modal .reportin {
-    margin-bottom: 30px;
-}
+    .inappropriate-modal .reportin {
+        margin-bottom: 30px;
+    }
 
-.inappropriate-modal .form-control {
-    margin-bottom: 30px;
-}
+    .inappropriate-modal .form-control {
+        margin-bottom: 30px;
+    }
 
 button.btn-inappropriate {
     background-color: red;
@@ -1441,9 +1435,9 @@ button.btn-in-cancel {
     margin-bottom: 40px;
 }
 
-.modal-rating > img {
-    padding: 5px;
-}
+    .modal-rating > img {
+        padding: 5px;
+    }
 
 .bottom-modal-content label {
     margin-bottom: 10px;
@@ -1473,11 +1467,11 @@ button.btn-in-cancel {
     margin-bottom: 20px;
 }
 
-.radio-content label {
-    vertical-align: middle;
-    margin-top: -20px;
-    margin-right: 30px;
-}
+    .radio-content label {
+        vertical-align: middle;
+        margin-top: -20px;
+        margin-right: 30px;
+    }
 
 .radio-item input[type='radio'] {
     -webkit-appearance: none;
@@ -1489,31 +1483,31 @@ button.btn-in-cancel {
     border: 1px solid #d1d1d1;
 }
 
-.radio-item input[type='radio']:before {
-    content: '';
-    display: block;
-    width: 14px;
-    height: 15px;
-    line-height: 15px;
-    margin: 9px;
-    border-radius: 50%;
-}
+    .radio-item input[type='radio']:before {
+        content: '';
+        display: block;
+        width: 14px;
+        height: 15px;
+        line-height: 15px;
+        margin: 9px;
+        border-radius: 50%;
+    }
 
-.radio-item input[type="radio"]:checked:before {
-    background: #6255a5;
-}
+    .radio-item input[type="radio"]:checked:before {
+        background: #6255a5;
+    }
 
-.radio-item input[type="radio"]:checked {
-    border-color: #6255a5;
-}
+    .radio-item input[type="radio"]:checked {
+        border-color: #6255a5;
+    }
 
 .note-pre {
     height: 140px;
 }
 
-.note-pre.upload label > img {
-    margin-top: 30px;
-}
+    .note-pre.upload label > img {
+        margin-top: 30px;
+    }
 
 .btn-line > #btn-user {
     margin: 0 15px;
@@ -1526,15 +1520,15 @@ button.btn-in-cancel {
 /* ================================================
                 My Sold Notes
 ===================================================*/
-#mysoldnote table tbody tr > td:nth-last-child(9)>a {
+#mysoldnote table tbody tr > td:nth-last-child(9) > a {
     color: #6255a5;
 }
 
 /* ================================================
                 My Rejected Notes
 ===================================================*/
-#myrejectednote table tbody tr > td:nth-last-child(5)>a,
-#myrejectednote table tbody tr > td:nth-last-child(3)>a {
+#myrejectednote table tbody tr > td:nth-last-child(5) > a,
+#myrejectednote table tbody tr > td:nth-last-child(3) > a {
     color: #6255a5;
 }
 
@@ -1565,10 +1559,10 @@ td .dropdown {
     margin: 5px 0;
 }
 
-.dropdown-menu li a:hover {
-    background-color: #6255a5;
-    color: #fff;
-}
+    .dropdown-menu li a:hover {
+        background-color: #6255a5;
+        color: #fff;
+    }
 
 .dropdown-item {
     height: 30px;
@@ -1643,6 +1637,10 @@ ul.navbar-nav > li {
     margin: 10px 0;
 }
 
+.navbar-nav .nav-link span img {
+    border-radius: 50%;
+}
+
 ul.navbar-nav > li > a {
     margin: 0 15px;
     color: #fff;
@@ -1650,12 +1648,12 @@ ul.navbar-nav > li > a {
     font-weight: 600;
 }
 
-ul.navbar-nav > li > a:hover,
-ul.navbar-nav > li > a:focus {
-    background: none;
-    color: #6255a5;
-    border-bottom: 3px solid #6255a5;
-}
+    ul.navbar-nav > li > a:hover,
+    ul.navbar-nav > li > a:focus {
+        background: none;
+        color: #6255a5;
+        border-bottom: 3px solid #6255a5;
+    }
 
 .userprofile-user-icon {
     height: 40px;
@@ -1672,15 +1670,15 @@ ul.navbar-nav > li > a:focus {
     z-index: 2;
 }
 
-.white-nav-top ul.navbar-nav > li > a:hover,
-.white-nav-top ul.navbar-nav > li > a:focus {
-    border-bottom: 3px solid #6255a5;
-    color: #6255a5;
-}
+    .white-nav-top ul.navbar-nav > li > a:hover,
+    .white-nav-top ul.navbar-nav > li > a:focus {
+        border-bottom: 3px solid #6255a5;
+        color: #6255a5;
+    }
 
-.white-nav-top ul.navbar-nav > li > a {
-    color: #000;
-}
+    .white-nav-top ul.navbar-nav > li > a {
+        color: #000;
+    }
 
 #mynavbtn {
     border-radius: 3px;
@@ -1710,10 +1708,10 @@ ul.navbar-nav > li > a:focus {
     font-size: 16px;
 }
 
-.dropdown ul li a span {
-    text-transform: uppercase;
-    color: #6255a5;
-}
+    .dropdown ul li a span {
+        text-transform: uppercase;
+        color: #6255a5;
+    }
 
 .dropdown ul li.link-login a:hover span {
     color: #fff;
@@ -1740,7 +1738,6 @@ ul.navbar-nav > li > a:focus {
 }
 
 #mobile-nav {
-
     width: 100%;
     height: 0%;
     position: fixed;
@@ -1772,9 +1769,9 @@ ul.navbar-nav > li > a:focus {
     transition: .3s;
 }
 
-#mobile-nav-close-btn:hover {
-    color: #6255a5;
-}
+    #mobile-nav-close-btn:hover {
+        color: #6255a5;
+    }
 
 #mobile-nav-content {
     text-align: center;
@@ -1799,11 +1796,11 @@ ul.navbar-nav > li > a:focus {
     font-size: 22px;
 }
 
-#mobile-nav ul li a span:hover,
-#mobile-nav ul li a span:focus {
-    color: #6255a5;
-    border-bottom: 3px solid #6255a5;
-}
+    #mobile-nav ul li a span:hover,
+    #mobile-nav ul li a span:focus {
+        color: #6255a5;
+        border-bottom: 3px solid #6255a5;
+    }
 
 #mobile-nav ul li #mybtn {
     margin-bottom: 20px;
@@ -1822,18 +1819,16 @@ ul.navbar-nav > li > a:focus {
 }
 
 #mobile-nav .nav-dropdown .dropdown-menu li > a {
-
     text-decoration: underline;
     font-size: 14px;
     color: #6255a5;
 }
 
-#mobile-nav .nav-dropdown .dropdown-menu li > a:hover {
-    background-color: transparent;
-}
+    #mobile-nav .nav-dropdown .dropdown-menu li > a:hover {
+        background-color: transparent;
+    }
 
 #mobile-nav .nav-dropdown .dropdown-menu li {
-
     margin-bottom: 5px;
 }
 
@@ -1851,81 +1846,83 @@ ul.navbar-nav > li > a:focus {
     justify-content: center;
     -ms-flex-line-pack: center;
     align-content: center;
-    margin-top: 50px;    
+    margin-top: 50px;
 }
 
-.pagination-container ul.pagination {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    vertical-align: middle;
-    margin: 0;
 
-}
+    .pagination-container ul.pagination {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        vertical-align: middle;
+        margin: 0;
+    }
 
-.pagination-container ul li {
-    list-style: none;
-    line-height: 30px;
-    padding: 0;
-}
+    .pagination-container ul li {
+        list-style: none;
+        line-height: 30px;
+        padding: 0;
+    }
 
-.pagination-container ul li.pgno {
-    width: 34px;
-    height: 34px;
-    line-height: 34px;
-    text-align: center;
-    vertical-align: middle;
-}
+        .pagination-container ul li.pgno {
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            vertical-align: middle;
+        }
 
-.pagination-container ul li a {
-    display: block;
-    text-decoration: none;
-    color: #333333;
-    font-weight: 600;
-    border-radius: 50%;
-    font-size: 16px;
-    padding: 0;
-    margin: 0;
-}
+        .pagination-container ul li a {
+            display: block;
+            text-decoration: none;
+            color: #333333;
+            font-weight: 600;
+            border-radius: 50%;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+        }
 
-.pagination-container ul li.pgno a {
-    font-size: 16px;
-    font-weight: 400;
-}
+        .pagination-container ul li.pgno a {
+            font-size: 16px;
+            font-weight: 400;
+        }
 
-.pagination-container ul li.pgno:hover a,
-.pagination-container ul li.pgno.active a {
-    background: #6255a5;
-    color: #fff;
-    padding-left: 10px;
-    padding-right: 10px;
-}
+        .pagination-container ul li.pgno:hover a,
+        .pagination-container ul li.pgno.active a {
+            background: #6255a5;
+            color: #fff;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
 
-.pagination-container ul li:first-child {
-/*    margin: 0 25px 0 0;*/
-    font-weight: 600;
-    font-size: 20px;
-/*    width: 8px;*/
-    height: 15px;
-    padding: 0;
-}
+        .pagination-container ul li:first-child {
+            /*    margin: 0 25px 0 0;*/
+            font-weight: 600;
+            font-size: 20px;
+            /*    width: 8px;*/
+            height: 15px;
+            padding: 0;
+        }
 
-.pagination-container ul li:last-child {
-/*    margin: 0 0 0 25px;*/
-    font-weight: 600;
-    font-size: 20px;
-/*    width: 8px;*/
-    height: 15px;
-    padding: 0;
-}
+        .pagination-container ul li:last-child {
+            /*    margin: 0 0 0 25px;*/
+            font-weight: 600;
+            font-size: 20px;
+            /*    width: 8px;*/
+            height: 15px;
+            padding: 0;
+        }
 
-.pagination-container ul li.pgno{
-        margin:0 2px;
-}
-.pagination-container ul li.PagedList-skipToPrevious {
-        margin: 0 10px 0 0;
-}
-.pagination-container ul li.PagedList-skipToNext {
-        margin: 0 0 0 10px;
-}
+        .pagination-container ul li.pgno {
+            margin: 0 2px;
+        }
+
+        .pagination-container ul li.PagedList-skipToPrevious {
+            margin: 0 10px 0 0;
+        }
+
+        .pagination-container ul li.PagedList-skipToNext {
+            margin: 0 0 0 10px;
+        }

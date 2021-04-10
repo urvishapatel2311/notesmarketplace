@@ -11,7 +11,8 @@ namespace NotesMarketPlace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class tblSystemConfig
     {
         public int id { get; set; }
@@ -28,5 +29,7 @@ namespace NotesMarketPlace.Models
         public Nullable<System.DateTime> modifiedDate { get; set; }
         public Nullable<int> modifiedBy { get; set; }
         public bool isActive { get; set; }
+        public HttpPostedFileBase noteImgFile { get; set; }
+        public HttpPostedFileBase profileImgFile { get; set; }
     }
 }

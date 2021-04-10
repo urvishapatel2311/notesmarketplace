@@ -1,0 +1,216 @@
+﻿@model NotesMarketPlace.Models.ViewModel
+@using NotesMarketPlace.Models
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Member Detail";
+}
+<section id="memberdetails" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row buy">
+                <!-- General heading -->
+                <div class="col-md-12">
+                    <div class="com-heading">
+                        <h3>Member Details</h3>
+                    </div>
+                </div>
+                <!-- General heading Ends -->
+                @{
+                    NotesMarketPlace.Models.notesmarketplaceEntities3 db = new NotesMarketPlace.Models.notesmarketplaceEntities3();
+                }
+                <div class="row m-details-all">
+                    <div class="col-xs-6 col-xl-6 col-lg-6 col-md-12 col-sm-6
+                           com-info-1">
+                        <div class="row">
+
+                            @if (string.IsNullOrEmpty(@Model.profileViewModel.profilePicture))
+                            {
+                                <div class="col-md-3 m-details-pic member-detail-img" style="height:160px;"><img src="@Url.Content(CommonViewModel.configViewModel.defaultProfilePicture)" class="img-fluid" alt="Images" style="height:160px;"></div>
+                            }
+                            else
+                            {
+                                <div class="col-md-3 m-details-pic member-detail-img" style="height:160px;"><img src="@Url.Content(Model.profileViewModel.profilePicture)" class="img-fluid" alt="Images" style="height:160px;"></div>
+                            }
+
+                            <div class="col-md-9 col-sm-9 m-details">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4"><span>First Name:</span></div>
+                                    <div class="col-md-8 col-sm-8">
+                                        <span>
+                                            <h6>@Model.profileViewModel.tblUser.firstName</h6>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4"><span>Last Name:</span></div>
+                                    <div class="col-md-8 col-sm-8">
+                                        <span>
+                                            <h6>@Model.profileViewModel.tblUser.lastName</h6>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4  col-sm-4"><span>Email:</span></div>
+                                    <div class="col-md-8  col-sm-8">
+                                        <span>
+                                            <h6>@Model.profileViewModel.tblUser.emailID</h6>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4  col-sm-4"><span>DOB:</span></div>
+                                    <div class="col-md-8  col-sm-8">
+                                        <span>
+                                            @if (string.IsNullOrEmpty(Model.profileViewModel.dob.ToString()))
+                                            {
+                                                <h6>&nbsp; - &nbsp;</h6>
+                                            }
+                                            <h6>@Model.profileViewModel.dob</h6>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4  col-sm-4"><span>Phone Number:</span></div>
+                                    <div class="col-md-8  col-sm-8">
+                                        <span>
+                                            <h6>@Model.profileViewModel.phoneNo</h6>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4  col-sm-4"><span>College/University:</span></div>
+                                    <div class="col-md-8  col-sm-4">
+                                        <span>
+                                            @if (string.IsNullOrEmpty(Model.profileViewModel.university))
+                                            {
+                                                <h6>&nbsp; - &nbsp;</h6>
+                                            }
+                                            <h6>@Model.profileViewModel.university</h6>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-xs-6 col-xl-6 col-lg-6 col-md-12 col-sm-6 com-info-2">
+                        <div class="row">
+                            <div class="col-md-3"><span>Address 1:</span></div>
+                            <div class="col-md-9">
+                                <span>
+                                    <h6>@Model.profileViewModel.addressLine1</h6>
+                                </span>
+                            </div>
+                            <div class="col-md-3"><span>Address 2:</span></div>
+                            <div class="col-md-9">
+                                <span>
+                                    @if (string.IsNullOrEmpty(Model.profileViewModel.addressLine2))
+                                    {
+                                        <h6>&nbsp; - &nbsp;</h6>
+                                    }
+                                    <h6>@Model.profileViewModel.addressLine2</h6>
+                                </span>
+                            </div>
+                            <div class="col-md-3"><span>City:</span></div>
+                            <div class="col-md-9">
+                                <span>
+                                    <h6>@Model.profileViewModel.city</h6>
+                                </span>
+                            </div>
+                            <div class="col-md-3"><span>State:</span></div>
+                            <div class="col-md-9">
+                                <span>
+                                    <h6>@Model.profileViewModel.state</h6>
+                                </span>
+                            </div>
+                            <div class="col-md-3"><span>Country:</span></div>
+                            <div class="col-md-9">
+                                <span>
+                                    <h6>@Model.profileViewModel.country</h6>
+                                </span>
+                            </div>
+                            <div class="col-md-3"><span>Zip Code:</span></div>
+                            <div class="col-md-9">
+                                <span>
+                                    @if (string.IsNullOrEmpty(Model.profileViewModel.zipcode))
+                                    {
+                                        <h6>&nbsp; - &nbsp;</h6>
+                                    }
+                                    <h6>@Model.profileViewModel.zipcode</h6>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- heading of table -->
+            <div class="table-heading">
+                <h4>Notes</h4>
+            </div>
+            <!-- heading of table Ends -->
+            <!-- Table data -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">@Html.ActionLink("Note Title", "memberDetails", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title", id = Model.profileViewModel.tblUser.id })</th>
+                            <th scope="col">@Html.ActionLink("Category", "memberDetails", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category", id = Model.profileViewModel.tblUser.id })</th>
+                            <th scope="col">@Html.ActionLink("Status", "memberDetails", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Status", id = Model.profileViewModel.tblUser.id })</th>
+                            <th scope="col">Downloaded Notes</th>
+                            <th scope="col">Total Earnings</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Published Date</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            IPagedList<NotesMarketPlace.Models.ViewModel> memberDetails = ViewBag.notes;
+                            if (memberDetails.Count() == 0)
+                            {
+                                <tr> <td colspan="9" class="align-middle"> Records not found </td></tr>
+                            }
+                            foreach (NotesMarketPlace.Models.ViewModel item in memberDetails)
+                            {
+                                var a = db.tblNoteDetails.Where(m => m.id == item.noteViewModel.id).FirstOrDefault();
+                                int totalOneBookEarning, noOfDownload = 0;
+                                totalOneBookEarning = (int)db.tblDownloads.Where(m => m.noteID == a.id && m.isSellerHasAllowedDownload).Select(m => m.purchasedPrice).ToList().Sum();
+                                noOfDownload = db.tblDownloads.Where(m => m.noteID == item.noteViewModel.id && m.isAttachmentDownloaded).Count();
+                                <tr>
+                                    <th scope="row">@(rowNo += 1)</th>
+                                    <td>@item.noteViewModel.noteTitle</td>
+                                    <td>@item.categoryViewModel.categoryName</td>
+                                    <td>@item.referenceViewModel.value</td>
+                                    <td><a href="/admin/downloadedNote?bookid=@item.noteViewModel.id">@noOfDownload</a></td>
+                                    <td>$@totalOneBookEarning</td>
+                                    <td>@item.noteViewModel.createdDate</td>
+                                    <td>@item.noteViewModel.publishedDate</td>
+                                    <td>
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="/user/DownloadBookfromMyWindow?bookId=@item.noteViewModel.id" class="dropdown-item">Download Note</a></li>
+                                        </ul>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- Table data Ends -->
+        </div>
+        <!-- Pagination -->
+        <div class="pagination-container">
+            @Html.PagedListPager(memberDetails, pageindex => Url.Action("memberDetails", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+            {
+                ContainerDivClasses = null,
+                LiElementClasses = new string[] { "pgno" },
+                UlElementClasses = new string[] { "pagination" },
+                LinkToPreviousPageFormat = "<",
+                LinkToNextPageFormat = ">",
+                MaximumPageNumbersToDisplay = 5,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never
+            })
+        </div>
+        <!-- Pagination Ends -->
+    </div>
+</section>

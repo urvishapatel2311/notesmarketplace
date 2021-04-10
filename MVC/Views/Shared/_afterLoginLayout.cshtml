@@ -40,7 +40,7 @@
                     <span id="mobile-nav-open-btn">&#9776;</span>
 
                     <!-- Logo -->
-                    <a class="navbar-brand" href=""><img class="img-fluid" src="~/Content/images/logo/logo.png"></a>
+                    <a class="navbar-brand" href="@Url.Action("HomePage","user")"><img class="img-fluid" src="~/Content/images/logo/logo.png"></a>
                 </div>
 
                 <!-- Main Menu -->
@@ -69,13 +69,12 @@
                                 <span>
                                     @if (CommonViewModel.profileViewModel?.profilePicture != null)
                                     {
-                                        <img src="@Url.Content(CommonViewModel.profileViewModel.profilePicture)" style=" width: 50px;" alt="User Photo" class="img-responsive img-fluid">
+                                        <img src="@Url.Content(CommonViewModel.profileViewModel.profilePicture)" style=" width: 50px; border-radius:50%;" alt="User Photo" class="img-responsive">
                                     }
                                     else
                                     {
-                                        <img src="~/Image/DefaultUserIcon.png" alt="User Photo" class="img-responsive img-fluid">
+                                        <img src="@Url.Content(CommonViewModel.configViewModel.defaultProfilePicture)" style=" width: 50px; border-radius:50%;" alt="User Photo" class="img-responsive">
                                     }
-                                    @*<img src="~/Content/images/icon-image/user-img.png" alt="User Photo">*@
                                 </span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -125,10 +124,10 @@
                                 <div class="dropdown nav-dropdown">
                                     <a class="nav-link" href="#" id="profile-photo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>My Account</span></a>
                                     <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu1">
-                                        <li><a class="dropdown-item" href="user_profile.html">My Profile</a></li>
-                                        <li><a class="dropdown-item" href="myDownload.html">My Downloads</a></li>
-                                        <li><a class="dropdown-item" href="mySoldNotes.html">My Sold Notes</a></li>
-                                        <li><a class="dropdown-item" href="myRejectedNote.html">My Rejected Notes</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("UserProfile", "user")">My Profile</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("MyDownload", "user")">My Downloads</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("MySoldNotes", "user")">My Sold Notes</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("MyRejectedNote", "user")">My Rejected Notes</a></li>
                                         <li><a class="dropdown-item" href="@Url.Action("ChangePassword", "user")">Change Password</a></li>
                                         <li><a class="dropdown-item" href="@Url.Action("Logout", "user")">Logout</a></li>
                                     </ul>
@@ -136,7 +135,7 @@
                             </li>
 
                             <li>
-                                <button type="submit" class="btn text-center" id="mynavbtn">Login</button>
+                                <button type="submit" class="btn text-center" id="mynavbtn"><a href="@Url.Action("Logout", "user")">Logout</a></button>
                             </li>
                         </ul>
                     </div>
@@ -152,7 +151,7 @@
 
 
         <!--Footer-->
-        <footer class="border-top">
+        <footer class="border-top container-fluid">
             <div class="container">
                 <div class="footer-content row">
                     <div class="footer-item col-md-6 col-xs-12 col-md-6 col-12">

@@ -1,0 +1,180 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Downloaded Note";
+}
+
+<!-- My Downloaded Notes -->
+<section id="downloadednote" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <!-- General heading -->
+            <div class="row buy">
+                <div class="col-md-12">
+                    <div class="com-heading">
+                        <h3>Downloaded Notes</h3>
+                    </div>
+                </div>
+                @{
+                    NotesMarketPlace.Models.notesmarketplaceEntities3 db = new NotesMarketPlace.Models.notesmarketplaceEntities3();
+                }
+                <div class="col-md-6 col-xs-12">
+                    <div class="row">
+                        <div class="form-group ddg rejlabl">
+                            <label>Note</label>
+                            <select class="dropdown-icon form-control" id="ddg" name="bookname" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("downloadedNote","admin", new { bookname=""})" disabled selected>Select Note</option>
+                                    List<String> booknames = db.tblNoteDetails.Select(m => m.noteTitle).Distinct().ToList();
+                                }
+                                @foreach (String bookname in booknames)
+                                {
+                                    if (bookname != null)
+                                    {
+                                        if (bookname.Equals(Request.QueryString["bookname"]))
+                                        {
+                                            <option selected value="@Url.Action("downloadedNote","admin", new { bookname=bookname.ToString()})">@bookname</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("downloadedNote","admin", new { bookname=bookname.ToString()})">@bookname</option>
+
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group ddg rejlabl">
+                            <label>Seller</label>
+                            <select class="dropdown-icon form-control" id="ddg" name="sellername" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("downloadedNote","admin", new { sellername=""})" disabled selected>Select Seller</option>
+                                    List<String> sellernames = db.tblUsers.Select(m => m.firstName).Distinct().ToList();
+                                }
+                                @foreach (String sellername in sellernames)
+                                {
+                                    if (sellername != null)
+                                    {
+                                        if (sellername.Equals(Request.QueryString["sellername"]))
+                                        {
+                                            <option selected value="@Url.Action("downloadedNote","admin", new { sellername=sellername.ToString()})">@sellername</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("downloadedNote","admin", new { sellername=sellername.ToString()})">@sellername</option>
+
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group ddg rejlabl">
+                            <label>Buyer</label>
+                            <select class="dropdown-icon form-control" id="ddg" name="buyername" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("downloadedNote","admin", new { buyername=""})" disabled selected>Select Buyer</option>
+                                    List<String> buyernames = db.tblUsers.Select(m => m.firstName).Distinct().ToList();
+                                }
+                                @foreach (String buyername in buyernames)
+                                {
+                                    if (buyername != null)
+                                    {
+                                        if (buyername.Equals(Request.QueryString["buyername"]))
+                                        {
+                                            <option selected value="@Url.Action("downloadedNote","admin", new { buyername=buyername.ToString()})">@buyername</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("downloadedNote","admin", new { buyername=buyername.ToString()})">@buyername</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 dash-search">
+                    <form>
+                        <div class=" download-search downloadnotebox search-box   has-search ">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                            <input name="sellername" hidden value="@Request.QueryString["sellername"]" />
+                            <input name="buyername" hidden value="@Request.QueryString["buyername"]" />
+                            <input name="bookname" hidden value="@Request.QueryString["bookname"]" />
+                            <button id="btn-buy" type="submit" class=" download-btn btn btn-primary btn-block ">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @ViewBag.record
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">@Html.ActionLink("Note Title", "downloadedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title" })</th>
+                            <th scope="col">@Html.ActionLink("Category", "downloadedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                            <th scope="col">@Html.ActionLink("Buyer", "downloadedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Seller" })</th>
+                            <th scope="col"></th>
+                            <th scope="col">@Html.ActionLink("Seller", "downloadedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Seller" })</th>
+                            <th scope="col"></th>
+                            <th scope="col">@Html.ActionLink("Sell Type", "downloadedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Sell Type" })</th>
+                            <th scope="col">@Html.ActionLink("Price", "downloadedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Price" })</th>
+                            <th scope="col">Downloaded<br>Date/Time</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="11" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
+                                <td>@item.categoryViewModel.categoryName</td>
+                                <td>@item.userViewModel.firstName @item.userViewModel.lastName</td>
+                                <td><a href="/admin/memberDetails?id=@item.userViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                <td>@item.noteViewModel.tblUser1.firstName @item.noteViewModel.tblUser1.lastName</td>
+                                <td><a href="/admin/memberDetails?id=@item.noteViewModel.tblUser1.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></td>
+                                @if (item.noteViewModel.isPaid)
+                                {
+                                    <td> Paid </td>
+                                }
+                                else
+                                {
+                                    <td> Free </td>
+
+                                }
+                                <td>$@item.noteViewModel.sellingPrice</td>
+                                <td>@item.downloadViewModel.createdDate</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li> <a class="dropdown-item" href="/user/DownloadBookfromMyWindow?bookId=@item.noteViewModel.id">Download Notes</a></li>
+                                            <li><a class="dropdown-item" href="/user/NoteDetails?id=@item.noteViewModel.id">View More Details</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("downloadedNote", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+           {
+               ContainerDivClasses = null,
+               LiElementClasses = new string[] { "pgno" },
+               UlElementClasses = new string[] { "pagination" },
+               LinkToPreviousPageFormat = "<",
+               LinkToNextPageFormat = ">",
+               MaximumPageNumbersToDisplay = 5,
+               DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never
+           })
+        </div>
+    </div>
+</section>

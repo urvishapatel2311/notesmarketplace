@@ -1,0 +1,154 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Rejected Note";
+}
+
+<!-- My Rejected Notes -->
+<section id="rejectednote" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <!-- General heading -->
+            <div class="row buy">
+                <div class="col-md-12">
+                    <div class="com-heading">
+                        <h3>Rejected Notes</h3>
+                    </div>
+                </div>
+                <div class="col-md-12 rejlabl">
+                    <label>Seller</label>
+                </div>
+                @{
+                    NotesMarketPlace.Models.notesmarketplaceEntities3 db = new NotesMarketPlace.Models.notesmarketplaceEntities3();
+                }
+                <div class="col-md-2">
+                    <div class="form-group ddg">
+                        <select class="dropdown-icon form-control" id="ddg" name="sellername" onchange="location.href=this.value">
+                            @{
+                                <option value="@Url.Action("rejectedNote","admin", new { sellername=""})" disabled selected>Select Seller</option>
+                                List<String> sellernames = db.tblUsers.Select(m => m.firstName).Distinct().ToList();
+                            }
+                            @foreach (String sellername in sellernames)
+                            {
+                                if (sellername != null)
+                                {
+                                    if (sellername.Equals(Request.QueryString["sellername"]))
+                                    {
+                                        <option selected value="@Url.Action("rejectedNote","admin", new { sellername=sellername.ToString()})">@sellername</option>
+                                        continue;
+                                    }
+                                }
+                                <option value="@Url.Action("rejectedNote","admin", new { sellername=sellername.ToString()})">@sellername</option>
+
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <form>
+                        <div class="search-box buy2  has-search">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+
+                            <input name="sellername" hidden value="@Request.QueryString["sellername"]" />
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @ViewBag.record
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">@Html.ActionLink("Note Title", "rejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Note Title" })</th>
+                            <th scope="col">@Html.ActionLink("Category", "rejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Category" })</th>
+                            <th scope="col">@Html.ActionLink("Seller", "rejectedNote", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Seller" })</th>
+                            <th scope="col"></th>
+                            <th scope="col">Date Edited</th>
+                            <th scope="col">Rejected By</th>
+                            <th scope="col">Remark</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="9" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td><a href="/user/NoteDetails?id=@item.noteViewModel.id">@item.noteViewModel.noteTitle</a></td>
+                                <td>@item.categoryViewModel.categoryName</td>
+                                <td>@item.userViewModel.firstName @item.userViewModel.lastName</td>
+                                <td><a href="/admin/memberDetails?id=@item.userViewModel.id"><img src="~/Content/images/icon-image/eye.png" class="eye-img"></a></td>
+                                <td>@item.noteViewModel.createdDate</td>
+                                <td>@item.noteViewModel.tblUser.firstName @item.noteViewModel.tblUser.lastName</td>
+                                <td>@item.noteViewModel.adminRemark</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="javascript:void(0);" onclick="onPublish(@item.noteViewModel.id)">Approve</a></li>
+                                            <li><a class="dropdown-item" href="/user/DownloadBookfromMyWindow?bookId=@item.noteViewModel.id">Download Notes</a></li>
+                                            <li><a class="dropdown-item" href="/admin/NoteDetails?id=@item.noteViewModel.id">View More Details</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <script>
+                    function onPublish(id) {
+                        document.getElementById("PublishForId").value = id;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                </script>
+
+                <!-- modal for In publish note -->
+                <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form method="post">
+                            <div class="modal-content review-modal">
+                                <div class="popup-head ">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Are you sure want to Publish this note?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="PublishForId" id="PublishForId" />
+                                    <p class="d-flex" style="color:black">
+                                        "If you approve the notes – System will publish the notes over portal. Please press yes to continue.”
+                                    </p>
+                                    <button class="btn-note-approve btn-yes" type="submit" value="publish" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of modal for In publish note -->
+            </div>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("rejectedNote", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+           {
+               ContainerDivClasses = null,
+               LiElementClasses = new string[] { "pgno" },
+               UlElementClasses = new string[] { "pagination" },
+               LinkToPreviousPageFormat = "<",
+               LinkToNextPageFormat = ">",
+               MaximumPageNumbersToDisplay = 5,
+               DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never
+           })
+        </div>
+    </div>
+</section>

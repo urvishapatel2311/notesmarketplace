@@ -11,12 +11,15 @@ namespace NotesMarketPlace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblManageCountry
     {
         public int id { get; set; }
         public int addedBy { get; set; }
+        [Required]
         public string countryName { get; set; }
+        [Required]
         public string countryCode { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<int> createdBy { get; set; }

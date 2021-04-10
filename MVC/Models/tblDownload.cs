@@ -38,9 +38,9 @@ namespace NotesMarketPlace.Models
         public Nullable<int> modifiedBy { get; set; }
         public bool isAttachmentDownloaded { get; set; }
     
-        public virtual tblNoteDetail tblNoteDetail { get; set; }
         public virtual tblUser tblUser { get; set; }
         public virtual tblUser tblUser1 { get; set; }
+        public virtual tblNoteDetail tblNoteDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblNoteReportedIsuue> tblNoteReportedIsuues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

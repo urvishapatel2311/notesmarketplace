@@ -26,8 +26,8 @@ namespace NotesMarketPlace.Models
         public Nullable<int> modifiedBy { get; set; }
         public bool isActive { get; set; }
     
+        public virtual tblUser tblUser { get; set; }
         public virtual tblDownload tblDownload { get; set; }
         public virtual tblNoteDetail tblNoteDetail { get; set; }
-        public virtual tblUser tblUser { get; set; }
     }
 }

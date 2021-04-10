@@ -11,7 +11,8 @@ namespace NotesMarketPlace.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblManageNoteCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,9 @@ namespace NotesMarketPlace.Models
     
         public int id { get; set; }
         public int addedBy { get; set; }
+        [Required]
         public string categoryName { get; set; }
+        [Required]
         public string description { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<int> createdBy { get; set; }

@@ -6,7 +6,6 @@
 }
 
 <div>
-
     <section id="addnotes">
         <!-- up Background photo -->
         <div id="bg-half" class="image-fluid">
@@ -23,23 +22,15 @@
                     <div class="general-heading" id="user-detail-01">
                         <h3>Basic Note Details</h3>
                     </div>
-                    <span style="color: green; font-size:28px;"><b>@ViewBag.Saved</b></span>
-                    <span style="color: green; font-size:28px;"><b>@ViewBag.data</b></span>
+                    <span style="color: green; font-size:24px;"><b>@ViewBag.Saved</b></span>
+                    <span style="color: green; font-size:24px;"><b>@ViewBag.data</b></span>
                     <div class="user-p">
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="form-content">
                                     <div class="form-group">
                                         <label for="title">Title *</label>
-                                        @*@if (ViewBag.isPageOfEdit)
-                                        {*@
-                                            @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title"})
-                                        @*}
-                                        else
-                                        {
-                                            @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title" })
-                                        }*@
-
+                                        @Html.TextBoxFor(m => m.noteTitle, new { placeholder = "Enter your notes title", @class = "form-control", @id = "title" })
                                         @Html.ValidationMessageFor(model => model.noteTitle, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -119,8 +110,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="general-heading" id="user-detail-03">
                         <h3>Institution Information</h3>
                     </div>
@@ -142,8 +131,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
@@ -239,25 +226,28 @@
                                 {
                                     <button id="btn-user" type="submit" class="btn btn-primary" name="command" value="save">Save</button>
                                 }
-                                
 
-                                <button id="btn-publish" type="submit" class="btn btn-primary btn-head" name="command" value="publish"> <!--data-toggle="modal" data-target="#exampleModalLong"-->Publish</button>
+                                @if (ViewBag.isPageOfEdit)
+                                {
+                                    <button id="btn-publish" type="button" class="btn btn-primary btn-head" data-target="#exampleModalLong" data-toggle="modal">Publish</button>
+                                }
 
                                 <!-- modal for publish note -->
-                                @*<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="popup-head text-center">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to publish?</h5>
                                             </div>
                                             <div class="popup-content">
-                                                <p class="d-flex" style="color:black">Publishing this note will send note to administrator for review,once administrator review and approve then this note will be published to portal.Press yes to continue".</p>
+                                                <p class="d-flex" style="color:black">"Publishing this note will send note to administrator for review,once administrator review and approve then this note will be published to portal.Press yes to continue".</p>
                                                 <button class="btn btn-primary" type="submit" value="publish" name="command" id="btn-yes">yes</button>
-                                                <button id="cancel" type="button" class="btn btn-primary close-btn" name="updateStatus" value="cancel">Cancel</button>
+                                                <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>*@
+                                </div>
+                                <!-- End of modal for publish note -->
 
                             </div>
                         </div>

@@ -1,0 +1,142 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Members";
+}
+<!-- Members -->
+<section id="members" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row buy">
+                <!-- General heading -->
+                <div class="col-md-4">
+                    <div class="com-heading">
+                        <h3>Members</h3>
+                    </div>
+                </div>
+                <!-- General heading Ends -->
+                @{
+                    NotesMarketPlace.Models.notesmarketplaceEntities3 db = new NotesMarketPlace.Models.notesmarketplaceEntities3();
+                }
+                <div class="col-md-8">
+                    <form>
+                        <div class=" manage search-box buy2  has-search manage">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Table data -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">@Html.ActionLink("First Name ", "members", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "First Name" })</th>
+                            <th scope="col">@Html.ActionLink("Last Name ", "members", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Last Name" })</th>
+                            <th scope="col">@Html.ActionLink("Email", "members", new { SortOrder = ViewBag.SortOrder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc"), SortBy = "Email" })</th>
+                            <th scope="col">Joining Date</th>
+                            <th scope="col">Under Review<br>Notes</th>
+                            <th scope="col">Published<br>Notes</th>
+                            <th scope="col">Downloaded<br>Notes</th>
+                            <th scope="col">Total<br>Expenses</th>
+                            <th scope="col">Total<br>Earnings</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="11" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            var a = db.tblUsers.Where(m => m.id == item.userViewModel.id).FirstOrDefault();
+                            int underReviewNotes, publishedNote, downloadedNote, totalExpense, totalEarning = 0;
+                            underReviewNotes = db.tblNoteDetails.Where(m => m.sellerID == a.id && (m.status == 4 || m.status == 5)).Count();
+                            publishedNote = db.tblNoteDetails.Where(m => m.sellerID == a.id && m.status == 6).Count();
+                            downloadedNote = db.tblDownloads.Where(m => m.downloader == a.id && m.isAttachmentDownloaded).Count();
+                            totalExpense = (int)db.tblDownloads.Where(m => m.downloader == a.id && m.isSellerHasAllowedDownload).Select(m => m.purchasedPrice).ToList().Sum();
+                            totalEarning = (int)db.tblDownloads.Where(m => m.seller == a.id && m.isSellerHasAllowedDownload).Select(m => m.purchasedPrice).ToList().Sum();
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td>@item.userViewModel.firstName</td>
+                                <td>@item.userViewModel.lastName</td>
+                                <td>@item.userViewModel.emailID</td>
+                                <td>@item.userViewModel.createdDate</td>
+                                <td><a href="/admin/NotesUnderReview?id=@item.userViewModel.id">@underReviewNotes</a></td>
+                                <td><a href="/admin/publishedNote?id=@item.userViewModel.id">@publishedNote</a></td>
+                                <td><a href="/admin/downloadedNote?id=@item.userViewModel.id">@downloadedNote</a></td>
+                                <td><a href="/admin/downloadedNote?id=@item.userViewModel.id">$@totalExpense</a></td>
+                                <td>$@totalEarning</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="nav-link" href="#" id="three-dot-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><img src="~/Content/images/icon-image/dots.png" alt="Dots-Menu"></span></a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="/admin/memberDetails?id=@item.userViewModel.id">View More Details</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);" onclick="onDeactivate(@item.userViewModel.id)">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+                <script>
+                    function onDeactivate(id) {
+                        document.getElementById("DeactivateForId").value = id;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                </script>
+
+                <!-- modal for InActive User -->
+                <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form method="post">
+                            <div class="modal-content review-modal">
+                                <div class="popup-head text-center">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Are you sure you want to make this member inactive?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="DeactivateForId" id="DeactivateForId" />
+
+                                    <button class="btn-note-approve btn-yes" type="submit" value="inActive" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of modal for InActive User -->
+            </div>
+            <!-- Table data Ends -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("members", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+           {
+               ContainerDivClasses = null,
+               LiElementClasses = new string[] { "pgno" },
+               UlElementClasses = new string[] { "pagination" },
+               LinkToPreviousPageFormat = "<",
+               LinkToNextPageFormat = ">",
+               MaximumPageNumbersToDisplay = 5,
+               DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never
+           })
+        </div>
+        <!-- Pagination Ends -->
+
+    </div>
+</section>

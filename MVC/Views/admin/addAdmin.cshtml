@@ -1,0 +1,66 @@
+﻿@model NotesMarketPlace.Models.ViewModel
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    ViewBag.Title = "Add Administrator";
+}
+
+<section id="addadmin" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <!-- General heading -->
+            <div class="general-heading">
+                <h3>Add Administrator</h3>
+            </div>
+            <div class="admin-p">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                        <form method="post">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="fname">First Name *</label>
+                                    @Html.TextBoxFor(m => m.userViewModel.firstName, new { placeholder = "Enter your first name", @class = "form-control", id = "fname" })
+                                    @Html.ValidationMessageFor(model => model.userViewModel.firstName, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name *</label>
+                                    @Html.TextBoxFor(m => m.userViewModel.lastName, new { placeholder = "Enter your last name", @class = "form-control", id = "fname" })
+                                    @Html.ValidationMessageFor(model => model.userViewModel.lastName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    @Html.TextBoxFor(m => m.userViewModel.emailID, new { placeholder = "Enter your email address", @class = "form-control", id = "email" })
+                                    @Html.ValidationMessageFor(model => model.userViewModel.emailID, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="phn">Phone Number</label>
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 col-sm-3">
+                                            @Html.DropDownListFor(m => m.profileViewModel.countryCode_phoneNo, ViewBag.CountryCodeList as SelectList, "", new { @class = "form-control dropdown-icon dropdown-tag", @id = "phn-profile" })
+                                            @Html.ValidationMessageFor(model => model.profileViewModel.countryCode_phoneNo, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-9 col-lg-9 col-sm-9">
+                                            @Html.TextBoxFor(m => m.profileViewModel.phoneNo, new { type = "number", @id = "phn", @placeholder = "Enter your phone number", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.profileViewModel.phoneNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (ViewBag.isPageOfEdit)
+                            {
+                                @Html.HiddenFor(m => m.userViewModel.id)
+                                <button id="btn-user" type="submit" class="btn btn-primary btn-block" name="command" value="update">Update</button>
+                            }
+                            else
+                            {
+                                <button id="btn-user" type="submit" class="btn btn-primary btn-block">Submit</button>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

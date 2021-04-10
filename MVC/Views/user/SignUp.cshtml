@@ -54,7 +54,7 @@
                                     @Html.PasswordFor(m => m.password, new { placeholder = "Enter your password", @class = "form-control", id = "password" })
                                     @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
 
-                                    <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="pwdVisible()">
+                                    <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="changeVisible(this)">
                                 </div>
                                 <div class="form-group">
                                     <label for="cnfmpwd">Confirm Password</label><div id="divCheckPassword"></div>
@@ -62,7 +62,7 @@
                                     @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
                                     <img src="~/Content/images/login/eye.png" alt="Eye-image" class="eye-image" onclick="changeVisible(this)">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                                <button type="submit" class="btn  btn-block">Sign Up</button>
                                 <div class="link-for-registration">
                                     <p class="text-center">Already have an account?<a href="@Url.Action("Login", "user")"> Login</a></p>
                                 </div>

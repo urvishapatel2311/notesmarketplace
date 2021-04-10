@@ -13,7 +13,7 @@
                 <p id="home-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 1500s when an<br>unknown printer took a gallery of type.
             </div>
             <div id="home-btn-head">
-                <a class="btn btn-general btn-home smooth-scroll" href="#Learn" title="Learn more" role="button">Learn More</a>
+                <a class="btn btn-general btn-home smooth-scroll" href="@Url.Action("FAQ", "user")" title="Learn more" role="button">Learn More</a>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
                             <p>Get Material for your <br>Cource etc</p>
 
                         </div>
-                        <button id="btn-down" type="submit" class="btn btn-primary btn-head">Download</button>
+                        <button id="btn-down" type="submit" class="btn  btn-head"><a href="@Url.Action("SearchNote", "user")">Download</a></button>
 
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                             <p>Upload and Download Cource <br>and Material etc.</p>
 
                         </div>
-                        <button id="btn-sell" type="submit" class="btn btn-primary btn-head">Sell Book</button>
+                        <button id="btn-sell" type="submit" class="btn  btn-head"><a href="@Url.Action("SellYourNote", "user")">Sell Book</a></button>
                     </div>
                 </div>
             </div>

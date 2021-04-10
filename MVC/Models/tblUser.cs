@@ -11,8 +11,8 @@ namespace NotesMarketPlace.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class tblUser
     {
@@ -30,6 +30,7 @@ namespace NotesMarketPlace.Models
             this.tblNoteReviews = new HashSet<tblNoteReview>();
             this.tblUserProfiles = new HashSet<tblUserProfile>();
         }
+
 
         public int id { get; set; }
         public int roleID { get; set; }
@@ -51,19 +52,21 @@ namespace NotesMarketPlace.Models
         [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])(\\S)*[A-Za-z\d@$!%*?&]{6,24}$", ErrorMessage = "Password must be strong")]
         public string password { get; set; }
-
+        [DisplayName("Rememberme")]
+        public bool Rememberme { get; set; }
         [Required]
         [System.ComponentModel.DataAnnotations.Compare("password")]
         public string Confirmpassword { get; set; }
-
-        [DisplayName("Rememberme")]
-        public bool Rememberme { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? dob { get; set; }
+        public string Content { get; set; }
 
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<int> createdBy { get; set; }
         public Nullable<System.DateTime> modifiedDate { get; set; }
         public Nullable<int> modifiedBy { get; set; }
         public bool isActive { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblDownload> tblDownloads { get; set; }

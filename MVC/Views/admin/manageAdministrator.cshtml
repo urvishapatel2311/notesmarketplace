@@ -1,0 +1,122 @@
+﻿@model IPagedList<NotesMarketPlace.Models.ViewModel>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int rowNo = 0;
+    ViewBag.Title = "Manage Administrator";
+}
+<!-- Manage Admin -->
+<section id="manageadmin" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+            <!-- General heading -->
+            <div class="row buy">
+                <div class="col-md-12">
+                    <div class="com-heading ma">
+                        <h3>Manage Administrator</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <button id="btn-add-admin" type="submit" class="btn btn-primary btn-block"><a href="@Url.Action("addAdmin","admin")">Add Administrator</a></button>
+                </div>
+                <div class="col-md-8 col-xs-12 ">
+                    <form>
+                        <div class="manage search-box buy2  has-search">
+                            @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                            <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone No.</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="8" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.ViewModel item in (IEnumerable<NotesMarketPlace.Models.ViewModel>)ViewData.Model)
+                        {
+                            <tr>
+                                <th scope="row">@(rowNo += 1)</th>
+                                <td>@item.userViewModel.firstName</td>
+                                <td>@item.userViewModel.lastName</td>
+                                <td>@item.userViewModel.emailID</td>
+                                <td>@item.profileViewModel.phoneNo</td>
+                                <td>@item.userViewModel.createdDate</td>
+                                @if (item.userViewModel.isActive)
+                                {
+                                    <td> Yes </td>
+                                }
+                                else
+                                {
+                                    <td> No </td>
+                                }
+                                <td>
+                                    <a href="/admin/EditmanageAdministrator/@item.userViewModel.id"><img src="~/Content/images/icon-image/edit.png" class="edit-icon img1"></a>
+                                    <a href="javascript:void(0);" onclick="deleteAdmin(@item.userViewModel.id);"><img src="~/Content/images/icon-image/delete.png" class="delete img2"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <script>
+                    function deleteAdmin(id) {
+                        document.getElementById("DeactivateForId").value = id;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                </script>
+
+                <!-- modal for InActive Admin -->
+                <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form method="post">
+                            <div class="modal-content review-modal">
+                                <div class="popup-head text-center">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Are you sure you want to make this administrator inactive?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="DeactivateForId" id="DeactivateForId" />
+
+                                    <button class="btn-note-approve btn-yes" type="submit" value="inActive" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of modal for InActive Admin -->
+            </div>
+        </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("manageAdministrator", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+           {
+               ContainerDivClasses = null,
+               LiElementClasses = new string[] { "pgno" },
+               UlElementClasses = new string[] { "pagination" },
+               LinkToPreviousPageFormat = "<",
+               LinkToNextPageFormat = ">",
+               MaximumPageNumbersToDisplay = 5,
+               DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+               DisplayLinkToLastPage = PagedListDisplayMode.Never
+           })
+        </div>
+    </div>
+</section>

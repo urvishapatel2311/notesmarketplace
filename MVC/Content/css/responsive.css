@@ -59,8 +59,6 @@
         width: 100px;
         height: 30px;
     }
-
-
 }
 
 /*---mobile nav btn open----*/
@@ -74,7 +72,6 @@
         position: relative;
         width: 100%;
     }
-
 }
 
 /*-------Submit button(all form) --------*/
@@ -139,7 +136,6 @@
     #search {
         height: 35px;
         font-size: 12px;
-
     }
 
     button.btn {
@@ -162,7 +158,6 @@
     .panel-body p {
         font-size: 14px;
         line-height: 18px;
-
     }
 
     /*---------Review popup---------*/
@@ -201,21 +196,21 @@
         margin: 15px 0 10px 0;
     }
 
-    .info-list ul li img {
-        width: 20px;
-        height: 15px;
-        margin-right: 10px;
-    }
+        .info-list ul li img {
+            width: 20px;
+            height: 15px;
+            margin-right: 10px;
+        }
 
-    .info-list ul li {
-        padding-bottom: 5px;
-    }
+        .info-list ul li {
+            padding-bottom: 5px;
+        }
 
-    .info-list ul li span,
-    .show-rating label {
-        font-size: 12px;
-        line-height: 20px;
-    }
+            .info-list ul li span,
+            .show-rating label {
+                font-size: 12px;
+                line-height: 20px;
+            }
 
     /*---- Common heading ----*/
     .com-heading h3 {
@@ -253,10 +248,10 @@
         line-height: 18px;
     }
 
-    .table tbody tr td img.eye-img {
-        height: 12px;
-        width: 23px;
-    }
+        .table tbody tr td img.eye-img {
+            height: 12px;
+            width: 23px;
+        }
 
     /*-------more menu--------*/
     a#three-dot-button > span img {
@@ -285,11 +280,11 @@
         height: 25px;
     }
 
-    .radio-item input[type='radio']:before {
-        width: 12px;
-        height: 12px;
-        margin: 5px;
-    }
+        .radio-item input[type='radio']:before {
+            width: 12px;
+            height: 12px;
+            margin: 5px;
+        }
 
     .radio-content label {
         margin-top: -15px;
@@ -314,7 +309,6 @@
     .panel-body p {
         font-size: 12px;
         line-height: 14px;
-
     }
 }
 
@@ -325,7 +319,15 @@
     #bg-full .container {
         padding: 10%;
     }
+    /*--------bg-full--------*/
+    #mobile-nav ul li a {
+        font-size: 16px;
+        margin: 0;
+    }
 
+    #mynavbtn > a {
+        color: #fff;
+    }
     /*--------form style--------*/
     .form_container {
         padding: 40px;
@@ -379,7 +381,6 @@
     #search {
         height: 35px;
         font-size: 12px;
-
     }
 
     button.btn {
@@ -417,11 +418,11 @@
     .dropdown-item {
         height: 20px;
     }
-
 }
 
 /* ----------------------Small Devices---------------------*/
 @media (max-width: 575px) {
+
 
     /*--------form style--------*/
     .form_container {
@@ -500,19 +501,24 @@
         height: 60px;
     }
 
-    .com-heading h3 {
-        font-size: 24px;
-    }
+        .com-heading h3 {
+            font-size: 24px;
+        }
 
     /*------User Profile------*/
     #phn-profile {
         margin-bottom: 10px;
-
     }
 
     /*---------Review popup---------*/
     #modal2 {
         margin-top: 100px;
+    }
+
+    .modal {
+        margin-left: 70px;
+        margin-right: 60px;
+        width: 75%;
     }
 
     .review-modal {
@@ -527,11 +533,11 @@
         margin-bottom: 30px;
     }
 
-    .modal-rating > img {
-        padding: 5px;
-        height: 35px;
-        width: 35px;
-    }
+        .modal-rating > img {
+            padding: 5px;
+            height: 35px;
+            width: 35px;
+        }
 
     .bottom-modal-content label {
         margin-bottom: 10px;
@@ -541,7 +547,6 @@
         height: 80px;
         margin-bottom: 20px;
     }
-
 }
 
 /* ----------------------Extra Small Devices---------------------*/
@@ -641,10 +646,8 @@
 
     /*---------FAQ--------------*/
     #faq > div#bg-half {
-
         padding: 75px 0;
     }
-
 }
 
 
@@ -704,8 +707,6 @@
         background-position: right 7px center;
         background-size: 10px;
     }
-
-
 }
 
 @media (max-width: 575px) {
@@ -726,8 +727,6 @@
     .footer-content {
         padding: 10px 0;
     }
-
-
 }
 
 @media (max-width: 320px) {
@@ -749,8 +748,34 @@
         text-align: center;
         margin-left: 18px;
     }
+    /*---------Review popup---------*/
+    .modal {
+        width: 80%;
+        height: 70%;
+        margin-left: 30px;
+    }
 
+    .rating > label {
+        font-size: 20px;
+    }
 
+    .inappropriate-modal .form-control {
+        width: 200px;
+    }
+
+    .inappropriate-modal .btn-in-cancel {
+        width: 80px;
+        font-size: 12px;
+    }
+
+    .inappropriate-modal .btn-inappropriate {
+        width: 120px;
+        font-size: 12px;
+    }
+
+    .reportin > h3 {
+        font-size: 18px;
+    }
 }
 
 
@@ -801,7 +826,6 @@
     .cust-p span > p {
         font-size: 12px;
     }
-
 }
 
 @media (max-width:1100px) {
@@ -809,11 +833,9 @@
     /*------notedetail---*/
     .note-head h3 {
         font-size: 16px;
-
     }
 
     .note-content-01 img {
-
         height: 190px;
         width: 150px;
     }
@@ -858,7 +880,6 @@
 
     .note-bottom {
         margin-top: 200px;
-
     }
 }
 
@@ -887,10 +908,10 @@
         line-height: 22px;
     }
 
-    #about-right p:first-child {
-        margin-bottom: 30px;
-        margin-top: 0px;
-    }
+        #about-right p:first-child {
+            margin-bottom: 30px;
+            margin-top: 0px;
+        }
 
     /*---------work section-------*/
 
@@ -901,9 +922,9 @@
         margin: 0;
     }
 
-    .about .work-content-img img {
-        padding: 20px;
-    }
+        .about .work-content-img img {
+            padding: 20px;
+        }
 
     .work-content h4 {
         margin-bottom: 10px;
@@ -921,12 +942,10 @@
     #btn-down {
         width: 112px;
         margin-bottom: 40px;
-
     }
 
     #btn-sell {
         width: 110px;
-
     }
 
     /*-----Customer section-----*/
@@ -939,12 +958,10 @@
         padding-top: 10px;
     }
 
-    .author-name-des h4,
-    .author-name-des h6 {
-        padding-left: 50px;
-    }
-
-
+        .author-name-des h4,
+        .author-name-des h6 {
+            padding-left: 50px;
+        }
 }
 
 @media (max-width:575px) {
@@ -976,7 +993,6 @@
 
     /*-----Note-detail-----*/
     .note-content-01 img {
-
         height: 200px;
         width: 200px;
     }
@@ -992,12 +1008,13 @@
     .custmer-inner {
         padding-left: 20px;
     }
-
-
-
 }
 
 @media(max-width:320px) {
+    section {
+        margin-top: 0;
+    }
+
     #home-heading {
         font-size: 30px;
     }
@@ -1008,17 +1025,14 @@
         min-height: 0;
     }
 
-    .author-name-des h4,
-    .author-name-des h6 {
-        padding-left: 0px;
-    }
+        .author-name-des h4,
+        .author-name-des h6 {
+            padding-left: 0px;
+        }
 
     .review-cust div > div.show-rating {
         padding: 0 0;
     }
-
-
-
 }
 
 
@@ -1041,10 +1055,10 @@
         margin-bottom: 0px;
     }
 
-    .popup-content p {
-        font-size: 14px;
-        margin: 20px 0;
-    }
+        .popup-content p {
+            font-size: 14px;
+            margin: 20px 0;
+        }
 
     .popup-head img {
         height: 55px;
@@ -1082,15 +1096,15 @@
         margin-bottom: 15px;
     }
 
-    .popup-content p {
-        font-size: 14px;
-        margin: 15px 0;
-    }
+        .popup-content p {
+            font-size: 14px;
+            margin: 15px 0;
+        }
 
-    .popup-content h5,
-    .popup-content {
-        font-size: 18px;
-    }
+        .popup-content h5,
+        .popup-content {
+            font-size: 18px;
+        }
 
 
     .popup-head h5 {
@@ -1105,10 +1119,10 @@
         padding-top: 10px;
     }
 
-    .popup-head img {
-        height: 45px;
-        width: 45px;
-    }
+        .popup-head img {
+            height: 45px;
+            width: 45px;
+        }
 
     .modal {
         margin-top: 80px;
@@ -1129,27 +1143,33 @@
         margin-bottom: 10px;
     }
 
-    .popup-content p {
-        font-size: 12px;
-        margin: 15px 0;
-    }
+        .popup-content p {
+            font-size: 12px;
+            margin: 15px 0;
+        }
 
-    .popup-content h5,
-    .popup-content {
-        font-size: 15px;
-    }
+        .popup-content h5,
+        .popup-content {
+            font-size: 15px;
+        }
 
 
     .popup-head h5 {
         font-size: 16px;
     }
-
 }
 
 /* =======================================================================
                             dashboard
 ==========================================================================*/
+@media(max-width:768px) {
+    .dash {
+        margin-top: 10px;
+    }
+}
+
 @media(max-width:575px) {
+
     .dash h4 {
         font-size: 22px;
         line-height: 28px;
@@ -1197,7 +1217,6 @@
         font-size: 16px;
         line-height: 18px;
     }
-
 }
 
 /* =======================================================================
@@ -1207,9 +1226,9 @@
 
 
 @media(max-width:575px) {
-    section {
-        margin-top: 80px;
-    }
+    /*section {
+            margin-top: 80px;
+        }*/
 
     .note-head h6 {
         font-size: 14px;
@@ -1222,9 +1241,9 @@
         line-height: 18px;
     }
 
-    .notes-info span > h6 {
-        text-align: left;
-    }
+        .notes-info span > h6 {
+            text-align: left;
+        }
 
     .note-content-02 div p,
     .notes-info .mark-in span {
@@ -1254,9 +1273,9 @@
         padding: 0 66px;
     }
 
-    .review-cust div > div.show-rating .rate:not(:checked) > label {
-        font-size: 20px;
-    }
+        .review-cust div > div.show-rating .rate:not(:checked) > label {
+            font-size: 20px;
+        }
 
 
     .rew-p p {
@@ -1264,32 +1283,41 @@
     }
 }
 
+@media(max-width:320px) {
+
+    .responsive-wrapper img, .responsive-wrapper object, .responsive-wrapper iframe {
+        height: 250px;
+    }
+
+    .rew-p p {
+        margin-left: 90px;
+    }
 
 
-/* =======================================================================
+
+    /* =======================================================================
                             Pagination
 ==========================================================================*/
-@media (max-width:575px) {
-    .pagination-container ul li {
-        line-height: 28px;
-    }
+    @media (max-width:575px) {
+        .pagination-container ul li {
+            line-height: 28px;
+        }
 
-    .pagination-container ul li.pgno {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-    }
+            .pagination-container ul li.pgno {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+            }
 
-    .pagination-container ul li.pgno a {
-        font-size: 15px;
-    }
+                .pagination-container ul li.pgno a {
+                    font-size: 15px;
+                }
 
-    .pagination-container ul li:first-child {
-        font-size: 15px;
-    }
+            .pagination-container ul li:first-child {
+                font-size: 15px;
+            }
 
-    .pagination-container ul li:last-child {
-        font-size: 15px;
+            .pagination-container ul li:last-child {
+                font-size: 15px;
+            }
     }
-
-}

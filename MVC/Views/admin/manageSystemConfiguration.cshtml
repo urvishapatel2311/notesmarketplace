@@ -1,0 +1,82 @@
+﻿@model NotesMarketPlace.Models.tblSystemConfig
+
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    ViewBag.Title = "Manage System Config";
+}
+<section id="managesystemconfig">
+    <div class="content-box-md">
+        <div class="container">
+            <!-- General heading -->
+            <div class="general-heading">
+                <h3>Manage System Configuration</h3>
+            </div>
+            <div class="admin-p">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xl-8 col-lg-8">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="semail">Support emails address *</label>
+                                    @Html.TextBoxFor(m => m.supportEmailID, new { placeholder = "Enter email address", @class = "form-control", id = "semail" })
+                                    @Html.ValidationMessageFor(model => model.supportEmailID, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="supportphn">Support phone number *</label>
+                                    @*<input type="number" class="form-control" id="supportphn" placeholder="Enter your phone number">*@
+                                    @Html.TextBoxFor(m => m.supportPhoneNo, new { type = "number", @id = "supportphn", @placeholder = "Enter your phone number", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.supportPhoneNo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="veemail">Email address(es) (for various events system will send notification to these users) *</label>
+                                    @*<input type="email" class="form-control" id="veemail" placeholder="Enter email address">*@
+                                    @Html.TextBoxFor(m => m.emailForEvent, new { placeholder = "Enter email address", @class = "form-control", id = "veemail" })
+                                    @Html.ValidationMessageFor(model => model.emailForEvent, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="fburl">Facebook URL</label>
+                                    @*<input type="url" class="form-control" id="fburl" placeholder="Enter Facebook url">*@
+                                    @Html.TextBoxFor(m => m.fbURL, new { type = "url", @id = "fburl", @placeholder = "Enter Facebook url", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.fbURL, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitterurl">Twitter URL</label>
+                                    @*<input type="url" class="form-control" id="twitterurl" placeholder="Enter twitter url">*@
+                                    @Html.TextBoxFor(m => m.twitterURL, new { type = "url", @id = "fburl", @placeholder = "Enter twitter url", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.twitterURL, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="lnkdinurl">LinkedIn URL</label>
+                                    @*<input type="url" class="form-control" id="lnkdinurl" placeholder="Enter linkedin url">*@
+                                    @Html.TextBoxFor(m => m.linkedinURL, new { type = "url", @id = "fburl", @placeholder = "Enter linkedin url", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.linkedinURL, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="profilepic">Default image for notes (if seller do not upload)</label>
+                                    <div class="upload text-center">
+                                        <input type="file" name="noteImgFile" id="file" accept="image/*">
+                                        <label class="file  text-center" for="file">
+                                            <img src="~/Content/images/User-Profile/upload.png">
+                                            <p>Upload a Picture</p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profilepic">Default profile picture (if seller do not upload)</label>
+                                    <div class="upload text-center">
+                                        <input type="file" name="profileImgFile" id="file" accept="image/*">
+                                        <label class="file  text-center" for="file">
+                                            <img src="~/Content/images/User-Profile/upload.png">
+                                            <p>Upload a Picture</p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="btn-admin-p" type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

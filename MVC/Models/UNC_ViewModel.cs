@@ -11,6 +11,7 @@ namespace NotesMarketPlace.Models
 
         public tblUserProfile profileViewModel { get; set; }
         public tblNoteReview reviewViewModel { get; set; }
+        
         public List<SingleReview> reviewViewModelList { get; set; }
         public String contryViewModel { get; set; }
 

@@ -1,0 +1,129 @@
+﻿@model IPagedList<NotesMarketPlace.Models.tblManageNoteType>
+@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    int i = 0;
+    ViewBag.Title = "Manage Type";
+}
+
+<!-- Manage Type -->
+<section id="managetype" class="fixheight">
+    <div class="content-box-md">
+        <div class="container">
+
+            <div class="row buy">
+                <!-- General heading -->
+                <div class="col-md-12">
+                    <div class="com-heading ma">
+                        <h3>Manage Type</h3>
+                    </div>
+                </div>
+                <!-- General heading Ends -->
+
+                <div class="col-md-4">
+                    <button id="btn-manage-type" type="submit" class="btn  btn-manage"><a href="@Url.Action("addType","admin")">Add Type</a></button>
+                </div>
+                <div class="col-md-8">
+                    <div class="manage search-box buy2 pull-right has-search">
+                        @Html.TextBox("searchTxt", null, new { @class = "form-control search-icon", @id = "search2", @placeholder = "Search" })
+                        <button id="btn-buy" type="submit" class="btn btn-primary btn-block">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table data -->
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sr No.</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date Added</th>
+                            <th scope="col">Added By</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr> <td colspan="7" class="align-middle"> Records not found </td></tr>
+                        }
+                        @foreach (NotesMarketPlace.Models.tblManageNoteType item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@(i += 1)</th>
+                                <td>@item.typeName</td>
+                                <td>@item.description</td>
+                                <td>@item.createdDate</td>
+                                <td>@item.tblUser.firstName @item.tblUser.lastName</td>
+                                @if (item.isActive)
+                                {
+                                    <td> yes </td>
+                                }
+                                else
+                                {
+                                    <td> No </td>
+
+                                }
+                                <td>
+                                    <a href="/admin/editType/@item.id"><img src="~/Content/images/icon-image/edit.png" class="img1"></a>
+                                    <a href="javascript:void(0);" onclick="deleteCategory(@item.id);"><img src="~/Content/images/icon-image/delete.png" class="img2"></a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <script>
+                    function deleteCategory(id) {
+                        document.getElementById("DeleteForId").value = id;
+                        $('#exampleModalLong2').modal('show');
+                    }
+                </script>
+
+                <!-- modal for InActive Type -->
+                <div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <form method="post">
+                            <div class="modal-content review-modal">
+                                <div class="popup-head text-center">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Are you sure you want to make this type inactive?
+                                    </h5>
+                                </div>
+                                <div class="content">
+                                    <input type="hidden" name="DeleteForId" id="DeleteForId" />
+                                    <button class="btn-note-reject btn-yes" type="submit" value="delete" name="command" id="btn-yes">Yes</button>
+                                    <button id="cancel" type="button" class="btn btn-primary close-btn" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End of modal for InActive Type -->
+            </div>
+            <!-- Table data Ends -->
+        </div>
+
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, pageindex => Url.Action("manageCategory", "admin", new { pageindex, search = Request.QueryString["searchTxt"] }), new PagedList.Mvc.PagedListRenderOptions
+          {
+              ContainerDivClasses = null,
+              LiElementClasses = new string[] { "pgno" },
+              UlElementClasses = new string[] { "pagination" },
+              LinkToPreviousPageFormat = "<",
+              LinkToNextPageFormat = ">",
+              MaximumPageNumbersToDisplay = 5,
+              DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+              DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+              DisplayLinkToLastPage = PagedListDisplayMode.Never
+          })
+        </div>
+        <!-- Pagination Ends -->
+
+    </div>
+</section>
+

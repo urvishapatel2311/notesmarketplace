@@ -28,7 +28,7 @@
                                 <h1>Login</h1>
                                 <p>Enter your email address and password to login</p>
                             </div>
-                            @ViewBag.error
+                            @ViewBag.error 
                             <div class="form-content">
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -46,7 +46,7 @@
                                     @Html.CheckBoxFor(m => m.Rememberme, new { @class = "form-check-input", id = "check_box" })
                                     @Html.LabelFor(m => m.Rememberme, new { @class = "form-check-label", id = "rememberme" })
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                <button type="submit" class="btn  btn-block">Login</button>
                                 <div class="link-for-registration">
                                     <p class="text-center">Don't have an account?<a href="@Url.Action("SignUp", "user")"> Sign Up</a></p>
                                 </div>

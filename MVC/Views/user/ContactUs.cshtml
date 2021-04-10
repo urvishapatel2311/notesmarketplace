@@ -66,7 +66,7 @@
                                     <div class="form-group">
                                         <label for="sub">Subject *</label>
                                         @Html.TextBox("sub", null, new { @class = "form-control", @placeholder = "Enter your subject", @required = "required", @name = "sub" })
-                                        @Html.ValidationMessage("sub", new { @class = "text-danger" });
+                                        @Html.ValidationMessage("sub", new { @class = "text-danger" })
 
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                     <div class="form-group">
                                         <label for="comment">Comments / Questions *</label>
                                         @Html.TextArea("comment", new { @placeholder = "Comments...", @class = "form-control", @required = "required", @name = "comment" })
-                                        @Html.ValidationMessage("comment", new { @class = "text-danger" });
+                                        @Html.ValidationMessage("comment", new { @class = "text-danger" })
 
                                     </div>
                                 </div>

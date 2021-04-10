@@ -10,16 +10,17 @@ namespace NotesMarketPlace.Controllers
     public class BaseController : Controller
     {
 
-        notesmarketplaceEntities db = new notesmarketplaceEntities();
+        notesmarketplaceEntities3 db = new notesmarketplaceEntities3();
 
         public tblUserProfile userData;
         public BaseController()
         {
 
             if (CommonViewModel.uId != 0)
-            {               
-               userData = db.tblUserProfiles.Where(e => e.userID == CommonViewModel.uId).SingleOrDefault();
+            {
+                userData = db.tblUserProfiles.Where(e => e.userID == CommonViewModel.uId).SingleOrDefault();
                 CommonViewModel.profileViewModel = userData;
+                CommonViewModel.configViewModel = db.tblSystemConfigs.FirstOrDefault();
             }
 
         }

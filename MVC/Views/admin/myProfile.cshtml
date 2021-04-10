@@ -1,0 +1,88 @@
+﻿@model NotesMarketPlace.Models.ViewModel
+@{
+    Layout = "~/Views/Shared/_AdminAfterLoginLayout.cshtml";
+    ViewBag.Title = "My Profile";
+}
+
+<section id="myprofile" class="fixheight">
+
+    <div class="content-box-md">
+        <div class="container">
+
+            <form method="post" enctype="multipart/form-data">
+                <!-- General heading -->
+                <div class="general-heading">
+                    <h3>My Profile</h3>
+                </div>
+                <!-- General heading Ends -->
+
+                <div class="admin-p">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <label for="fname">First Name *</label>
+                                    @Html.TextBox("fname", (string)ViewBag.fname, new { @id = "fname", @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name *</label>
+                                    @Html.TextBox("lname", (string)ViewBag.lname, new { @id = "lname", @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    @Html.TextBox("email", (string)ViewBag.emailadd, new
+                                    {
+                                        @id = "email",
+                                        @class = "form-control"@*, @disabled = "disabled"*@})
+                                </div>
+                                <div class="form-group">
+                                    <label for="semail">Secondary Email</label>
+                                    @Html.TextBoxFor(m => m.profileViewModel.secondaryEmailID, new { type = "number", @id = "phn", @placeholder = "Enter your phone number", @class = "form-control" })
+
+                                </div>
+                                <div class="form-group dropdown">
+                                    <label for="email">Gender</label>
+                                    <div class="dropdown">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(m => m.profileViewModel.gender, ViewBag.GenderList as SelectList, "Select your gender", new { @class = "form-control dropdown-icon", @id = "ddg" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phn">Phone Number</label>
+
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 col-sm-3 num-dropdown">
+                                            @Html.DropDownListFor(m => m.profileViewModel.countryCode_phoneNo, ViewBag.CountryCodeList as SelectList, "", new { @class = "form-control dropdown-icon", @id = "phn-profile" })
+                                            @Html.ValidationMessageFor(model => model.profileViewModel.countryCode_phoneNo, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-9 col-lg-9 col-sm-9">
+                                            @*<input type="number" class="form-control" id="phn" placeholder="Enter your phone number">*@
+                                            @Html.TextBoxFor(m => m.profileViewModel.phoneNo, new { type = "number", @id = "phn", @placeholder = "Enter your phone number", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.profileViewModel.phoneNo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profilepic">Profile Picture</label>
+                                    <div class="upload text-center">
+                                        <input type="file" id="file" name="profileImage" accept="image/*">
+                                        <label class="file  text-center" for="file">
+                                            <img src="~/Content/images/User-Profile/upload.png">
+                                            <p>Upload a Picture</p>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (ViewBag.isPageOfEdit)
+                            {
+                                <button id="btn-admin-p" type="submit" class="btn btn-primary btn-block" name="command" value="update">Submit</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
